@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css">
+    <link rel="shortcut icon" href="YOUR_FAVICON_HERE">
+    <title>Gray Whale API Docs</title>
+    <style>
+      /* ── Swagger UI overrides ── */
+      .swagger-ui .topbar { display: none; }
+      .swagger-ui .servers,
+      .swagger-ui div:has(> .servers) { display: none !important; }
+
+      /* ── Company header ── */
+      #company-header {
+        background-color: #4c92cb;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+      }
+      #company-header img { height: 60px; }
+
+      /* ══════════════════════════════════════════
+         WebSocket Docs Design System
+      ══════════════════════════════════════════ */
+      :root {
+        --gw-blue:        #4c92cb;
+        --gw-blue-dark:   #3a7ab8;
+        --gw-blue-light:  #d6e8f7;
+        --gw-slate:       #abb8c3;
+        --gw-slate-light: #f0f4f7;
+        --gw-bg:          #fafbfc;
+        --gw-border:      #dde3ea;
+        --gw-text:        #1a2332;
+        --gw-muted:       #5a6a7a;
+        --gw-green:       #2ecc71;
+        --gw-red:         #e74c3c;
+        --gw-yellow:      #f39c12;
+        --gw-orange:      #e67e22;
+        --gw-code-bg:     #1e2736;
+        --gw-code-fg:     #e8edf3;
+        --r:              8px;
+        --r-sm:           4px;
+      }
+
+      /* ── Section wrapper ── */
+      #websocket-docs {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 48px 24px 80px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: var(--gw-text);
+      }
+
+      /* ── Hero ── */
+      .ws-hero {
+        background: linear-gradient(135deg, #1a2332 0%, #2d4a6e 100%);
+        color: white;
+        padding: 40px 36px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+      }
+      .ws-hero::before {
+        content: "";
+        position: absolute;
+        top: -40px; right: -40px;
+        width: 220px; height: 220px;
+        border-radius: 50%;
+        background: rgba(76,146,203,0.15);
+      }
+      .ws-hero::after {
+        content: "";
+        position: absolute;
+        bottom: -60px; right: 100px;
+        width: 140px; height: 140px;
+        border-radius: 50%;
+        background: rgba(76,146,203,0.10);
+      }
+      .ws-hero-inner { position: relative; }
+      .ws-hero-title-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .ws-hero-title-row h2 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+      }
+      .ws-chip {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        padding: 3px 10px;
+        border-radius: 99px;
+        background: rgba(76,146,203,0.45);
+        color: white;
+        text-transform: uppercase;
+      }
+      .ws-hero p {
+        margin: 0 0 24px;
+        color: rgba(255,255,255,0.75);
+        font-size: 15px;
+        max-width: 620px;
+        line-height: 1.6;
+      }
+      .ws-url-badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.22);
+        padding: 10px 18px;
+        border-radius: 6px;
+        font-family: "SF Mono", Consolas, "Fira Code", monospace;
+        font-size: 13px;
+        word-break: break-all;
+        color: #a8d8f0;
+      }
+      .ws-url-badge .proto { color: rgba(255,255,255,0.45); }
+
+      /* ── Section title ── */
+      .ws-section-title {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--gw-blue);
+        margin: 0 0 6px;
+      }
+      .ws-section-heading {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--gw-text);
+        margin: 0 0 24px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--gw-border);
+      }
+
+      /* ── Flow diagram ── */
+      .ws-flow {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        padding: 28px 24px;
+        background: var(--gw-slate-light);
+        border: 1px solid var(--gw-border);
+        border-radius: var(--r);
+        margin-bottom: 48px;
+        overflow-x: auto;
+      }
+      .ws-flow-step {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+      }
+      .ws-flow-bubble {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: var(--gw-blue);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin: 0 auto 10px;
+        box-shadow: 0 2px 10px rgba(76,146,203,0.35);
+      }
+      .ws-flow-bubble.warn { background: var(--gw-orange); box-shadow: 0 2px 10px rgba(230,126,34,0.35); }
+      .ws-flow-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--gw-text);
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+      .ws-flow-sub {
+        font-size: 11px;
+        color: var(--gw-muted);
+        margin-top: 3px;
+        line-height: 1.4;
+      }
+      .ws-flow-arrow {
+        font-size: 22px;
+        color: var(--gw-blue);
+        padding: 0 6px;
+        flex-shrink: 0;
+        padding-bottom: 26px;
+      }
+
+      /* ── Steps ── */
+      .ws-step { margin-bottom: 52px; }
+      .ws-step-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      .ws-step-num {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--gw-blue);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 16px;
+        flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(76,146,203,0.35);
+      }
+      .ws-step-num.special { background: #27ae60; box-shadow: 0 2px 8px rgba(39,174,96,0.35); }
+      .ws-step-header h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--gw-text);
+        margin: 0;
+      }
+
+      /* ── Callout ── */
+      .ws-callout {
+        background: var(--gw-blue-light);
+        border-left: 4px solid var(--gw-blue);
+        padding: 12px 16px;
+        border-radius: 0 var(--r-sm) var(--r-sm) 0;
+        font-size: 13px;
+        color: var(--gw-text);
+        margin: 0 0 20px;
+        line-height: 1.6;
+      }
+      .ws-callout.warn {
+        background: #fef9e7;
+        border-color: var(--gw-yellow);
+      }
+      .ws-callout strong { color: var(--gw-blue-dark); }
+      .ws-callout.warn strong { color: #b7770d; }
+
+      /* ── Parameter table ── */
+      .ws-param-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        margin-bottom: 20px;
+        border: 1px solid var(--gw-border);
+        border-radius: var(--r);
+        overflow: hidden;
+      }
+      .ws-param-table th {
+        background: var(--gw-slate-light);
+        color: var(--gw-muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        padding: 9px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--gw-border);
+      }
+      .ws-param-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--gw-border);
+        vertical-align: top;
+      }
+      .ws-param-table tr:last-child td { border-bottom: none; }
+      .ws-param-table tr:hover td { background: var(--gw-slate-light); }
+      .ws-param-name {
+        font-family: "SF Mono", Consolas, monospace;
+        color: var(--gw-blue);
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .ws-param-type {
+        font-size: 11px;
+        background: var(--gw-slate-light);
+        color: var(--gw-muted);
+        padding: 2px 7px;
+        border-radius: 99px;
+        border: 1px solid var(--gw-border);
+        white-space: nowrap;
+      }
+      .ws-badge-req {
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--gw-red);
+        background: #fde8e8;
+        padding: 2px 7px;
+        border-radius: 99px;
+      }
+
+      /* ── Code tabs ── */
+      .ws-tabs { margin: 0 0 24px; }
+      .ws-tab-bar {
+        display: flex;
+        gap: 2px;
+        border-bottom: 2px solid var(--gw-border);
+      }
+      .ws-tab-btn {
+        padding: 8px 18px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--gw-muted);
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        transition: color 0.15s, background 0.15s;
+        border-radius: var(--r-sm) var(--r-sm) 0 0;
+      }
+      .ws-tab-btn:hover { color: var(--gw-blue); background: var(--gw-blue-light); }
+      .ws-tab-btn.active { color: var(--gw-blue); border-bottom-color: var(--gw-blue); background: var(--gw-slate-light); }
+      .ws-tab-panel { display: none; }
+      .ws-tab-panel.active { display: block; }
+      .ws-code-block {
+        background: var(--gw-code-bg);
+        color: var(--gw-code-fg);
+        border-radius: 0 var(--r) var(--r) var(--r);
+        padding: 20px 48px 20px 24px;
+        overflow-x: auto;
+        font-family: "SF Mono", Consolas, "Fira Code", monospace;
+        font-size: 13px;
+        line-height: 1.65;
+        position: relative;
+      }
+      .ws-code-block pre { margin: 0; white-space: pre; }
+      .ws-copy-btn {
+        position: absolute;
+        top: 10px; right: 10px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: rgba(255,255,255,0.6);
+        padding: 4px 10px;
+        border-radius: var(--r-sm);
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-family: -apple-system, sans-serif;
+      }
+      .ws-copy-btn:hover { background: rgba(255,255,255,0.2); color: white; }
+      .ws-copy-btn.copied { color: var(--gw-green); border-color: var(--gw-green); }
+
+      /* token colors inside code blocks */
+      .t-kw  { color: #7ec8e3; }   /* keyword */
+      .t-str { color: #a8e6a3; }   /* string */
+      .t-fn  { color: #ffda87; }   /* function */
+      .t-cm  { color: #6a7f8e; font-style: italic; } /* comment */
+      .t-num { color: #f0a875; }   /* number */
+      .t-var { color: #e8edf3; }   /* variable */
+
+      /* ── Schema grid ── */
+      .ws-schema-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin: 0 0 24px;
+      }
+      .ws-schema-card {
+        border: 1px solid var(--gw-border);
+        border-radius: var(--r);
+        overflow: hidden;
+        font-size: 13px;
+      }
+      .ws-schema-header {
+        padding: 10px 14px;
+        font-weight: 600;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: white;
+      }
+      .ws-schema-header.send    { background: var(--gw-blue); }
+      .ws-schema-header.nested  { background: var(--gw-blue-dark); }
+      .ws-schema-header.keepalive { background: var(--gw-orange); }
+      .ws-schema-badge {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 99px;
+        background: rgba(255,255,255,0.25);
+        letter-spacing: 0.5px;
+      }
+      .ws-schema-field {
+        padding: 9px 14px;
+        border-bottom: 1px solid var(--gw-border);
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        flex-wrap: wrap;
+        line-height: 1.5;
+      }
+      .ws-schema-field:last-child { border-bottom: none; }
+      .ws-schema-field:hover { background: var(--gw-slate-light); }
+      .sf-name {
+        font-family: "SF Mono", Consolas, monospace;
+        color: var(--gw-blue);
+        font-size: 12px;
+        font-weight: 600;
+        min-width: 110px;
+      }
+      .sf-type {
+        font-size: 11px;
+        color: var(--gw-muted);
+        background: var(--gw-slate-light);
+        padding: 1px 7px;
+        border-radius: 99px;
+        border: 1px solid var(--gw-border);
+      }
+      .sf-desc { color: var(--gw-text); flex: 1; min-width: 120px; }
+      .sf-req  { font-size: 10px; font-weight: 700; color: var(--gw-red); }
+      .sf-note {
+        color: var(--gw-muted);
+        font-size: 12px;
+        font-style: italic;
+        width: 100%;
+        padding-top: 2px;
+      }
+
+      /* ── Interactive console ── */
+      .ws-console {
+        border: 2px solid var(--gw-border);
+        border-radius: var(--r);
+        overflow: hidden;
+      }
+      .ws-console-header {
+        background: var(--gw-slate-light);
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--gw-border);
+      }
+      .ws-console-title {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--gw-text);
+      }
+      .ws-status-row {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        color: var(--gw-muted);
+      }
+      .ws-dot {
+        width: 9px; height: 9px;
+        border-radius: 50%;
+        background: var(--gw-slate);
+        transition: background 0.3s, box-shadow 0.3s;
+        flex-shrink: 0;
+      }
+      .ws-dot.connected   { background: var(--gw-green); box-shadow: 0 0 0 3px rgba(46,204,113,0.25); }
+      .ws-dot.error       { background: var(--gw-red);   box-shadow: 0 0 0 3px rgba(231,76,60,0.25); }
+      .ws-dot.connecting  { background: var(--gw-yellow); animation: ws-pulse 1s ease-in-out infinite; }
+      @keyframes ws-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(243,156,18,0.5); }
+        50%      { box-shadow: 0 0 0 5px rgba(243,156,18,0); }
+      }
+      .ws-console-inputs {
+        padding: 16px;
+        background: white;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        border-bottom: 1px solid var(--gw-border);
+      }
+      .ws-input-group label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--gw-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 5px;
+      }
+      .ws-input-group input {
+        width: 100%;
+        padding: 7px 10px;
+        border: 1px solid var(--gw-border);
+        border-radius: var(--r-sm);
+        font-size: 12px;
+        font-family: "SF Mono", Consolas, monospace;
+        color: var(--gw-text);
+        box-sizing: border-box;
+        transition: border-color 0.15s, box-shadow 0.15s;
+      }
+      .ws-input-group input:focus {
+        outline: none;
+        border-color: var(--gw-blue);
+        box-shadow: 0 0 0 3px var(--gw-blue-light);
+      }
+      .ws-console-actions {
+        padding: 10px 14px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid var(--gw-border);
+        background: var(--gw-slate-light);
+        align-items: center;
+      }
+      .ws-btn {
+        padding: 7px 16px;
+        border-radius: var(--r-sm);
+        border: 1px solid transparent;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s;
+        white-space: nowrap;
+      }
+      .ws-btn:disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+      .ws-btn-primary  { background: var(--gw-blue); color: white; }
+      .ws-btn-primary:hover:not(:disabled)  { background: var(--gw-blue-dark); }
+      .ws-btn-secondary { background: white; color: var(--gw-text); border-color: var(--gw-border); }
+      .ws-btn-secondary:hover:not(:disabled) { border-color: var(--gw-blue); color: var(--gw-blue); }
+      .ws-btn-danger   { background: white; color: var(--gw-red); border-color: #f5c6c6; }
+      .ws-btn-danger:hover:not(:disabled) { background: #fde8e8; }
+      .ws-btn-ghost    { background: transparent; color: var(--gw-muted); border-color: transparent; font-size: 12px; margin-left: auto; }
+      .ws-btn-ghost:hover:not(:disabled) { color: var(--gw-text); }
+      .ws-console-log {
+        background: var(--gw-code-bg);
+        color: var(--gw-code-fg);
+        min-height: 160px;
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 14px 16px;
+        font-family: "SF Mono", Consolas, monospace;
+        font-size: 12px;
+        line-height: 1.75;
+      }
+      .ws-log-line { display: flex; gap: 10px; align-items: flex-start; }
+      .ws-log-time { color: #4a5e72; font-size: 11px; flex-shrink: 0; padding-top: 1px; }
+      .ws-log-icon { flex-shrink: 0; width: 14px; padding-top: 1px; }
+      .ws-log-msg  { flex: 1; word-break: break-word; white-space: pre-wrap; }
+      .ws-log-line.sent     .ws-log-msg { color: #7ec8e3; }
+      .ws-log-line.received .ws-log-msg { color: #a8e6a3; }
+      .ws-log-line.system   .ws-log-msg { color: var(--gw-yellow); }
+      .ws-log-line.error    .ws-log-msg { color: var(--gw-red); }
+    </style>
+  </head>
+  <body>
+
+    <div id="company-header">
+      <img src="graywhale_logo.png" alt="Gray Whale">
+    </div>
+
+    <div id="swagger-ui"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         WebSocket Feed — Rich Reference Section
+    ══════════════════════════════════════════════════════ -->
+    <div style="height:3px;background:linear-gradient(to right,#4c92cb,#abb8c3,#4c92cb);"></div>
+
+    <div id="websocket-docs">
+
+      <!-- Hero -->
+      <div class="ws-hero">
+        <div class="ws-hero-inner">
+          <div class="ws-hero-title-row">
+            <span style="font-size:30px;">&#9889;</span>
+            <h2>WebSocket Feed</h2>
+            <span class="ws-chip">Real-Time</span>
+          </div>
+          <p>Get live, personalized recommendations streamed directly to your app. The Gray Whale LIM ranks items in real time based on each visitor's behavior — no historical data required.</p>
+          <div class="ws-url-badge">
+            <span class="proto">wss://</span>app.productgenius.io/ws/platform/feed/<span style="color:#ffda87">{project_id}</span>/<span style="color:#ffda87">{visitor_id}</span>/<span style="color:#ffda87">{session_id}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connection Flow Diagram -->
+      <p class="ws-section-title">Connection Lifecycle</p>
+      <div class="ws-flow">
+        <div class="ws-flow-step">
+          <div class="ws-flow-bubble">&#128279;</div>
+          <div class="ws-flow-label">Connect</div>
+          <div class="ws-flow-sub">Open WSS<br>connection</div>
+        </div>
+        <div class="ws-flow-arrow">&#8594;</div>
+        <div class="ws-flow-step">
+          <div class="ws-flow-bubble">&#128221;</div>
+          <div class="ws-flow-label">Request</div>
+          <div class="ws-flow-sub">Send pagination<br>request</div>
+        </div>
+        <div class="ws-flow-arrow">&#8594;</div>
+        <div class="ws-flow-step">
+          <div class="ws-flow-bubble">&#128200;</div>
+          <div class="ws-flow-label">Receive</div>
+          <div class="ws-flow-sub">Get ranked<br>feed items</div>
+        </div>
+        <div class="ws-flow-arrow">&#8594;</div>
+        <div class="ws-flow-step">
+          <div class="ws-flow-bubble">&#128260;</div>
+          <div class="ws-flow-label">Loop</div>
+          <div class="ws-flow-sub">Send linger metrics<br>+ next request</div>
+        </div>
+        <div class="ws-flow-arrow">&#8594;</div>
+        <div class="ws-flow-step">
+          <div class="ws-flow-bubble warn">&#9203;</div>
+          <div class="ws-flow-label">Keepalive</div>
+          <div class="ws-flow-sub">Ping every<br>&lt; 2 min</div>
+        </div>
+      </div>
+
+      <!-- ── Step 1: Connect ── -->
+      <div class="ws-step">
+        <div class="ws-step-header">
+          <div class="ws-step-num">1</div>
+          <h3>Connect</h3>
+        </div>
+        <div class="ws-callout">
+          Open a WebSocket connection using the URL below. The three path parameters identify <strong>which project</strong> to pull from, <strong>who the visitor is</strong>, and <strong>which session</strong> is active.
+        </div>
+        <table class="ws-param-table">
+          <thead>
+            <tr><th>Parameter</th><th>Type</th><th>Description</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="ws-param-name">project_id</span></td>
+              <td><span class="ws-param-type">string</span></td>
+              <td>Your Gray Whale project name (e.g. <code>fly_finder</code>)</td>
+              <td><span class="ws-badge-req">required</span></td>
+            </tr>
+            <tr>
+              <td><span class="ws-param-name">visitor_id</span></td>
+              <td><span class="ws-param-type">UUID</span></td>
+              <td>Unique identifier for this visitor</td>
+              <td><span class="ws-badge-req">required</span></td>
+            </tr>
+            <tr>
+              <td><span class="ws-param-name">session_id</span></td>
+              <td><span class="ws-param-type">UUID</span></td>
+              <td>Unique identifier for this browsing session — generate a fresh UUID per session or search prompt</td>
+              <td><span class="ws-badge-req">required</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="ws-tabs" data-group="step1">
+          <div class="ws-tab-bar">
+            <button class="ws-tab-btn active" data-tab="js">JavaScript</button>
+            <button class="ws-tab-btn" data-tab="py">Python</button>
+            <button class="ws-tab-btn" data-tab="wscat">wscat (CLI)</button>
+          </div>
+          <div class="ws-tab-panel active" data-panel="js">
+            <div class="ws-code-block">
+              <button class="ws-copy-btn" onclick="wsCopy(this)">Copy</button>
+              <pre><span class="t-kw">const</span> project_id = <span class="t-str">"fly_finder"</span>;
+<span class="t-kw">const</span> visitor_id  = <span class="t-str">"199bd538-30a0-4921-922d-cd81dfc6f308"</span>;
+<span class="t-kw">const</span> session_id  = <span class="t-str">"17a6f3c6-1669-44da-862e-fc0d86f1dd29"</span>;
+
+<span class="t-kw">const</span> ws = <span class="t-kw">new</span> <span class="t-fn">WebSocket</span>(
+  `wss://app.productgenius.io/ws/platform/feed/<span class="t-var">${project_id}</span>/<span class="t-var">${visitor_id}</span>/<span class="t-var">${session_id}</span>`
+);
+
+ws.<span class="t-fn">onopen</span>    = ()    =&gt; console.<span class="t-fn">log</span>(<span class="t-str">"Connected to Gray Whale feed"</span>);
+ws.<span class="t-fn">onmessage</span> = (e)   =&gt; console.<span class="t-fn">log</span>(<span class="t-str">"Received:"</span>, JSON.<span class="t-fn">parse</span>(e.data));
+ws.<span class="t-fn">onerror</span>   = (err) =&gt; console.<span class="t-fn">error</span>(<span class="t-str">"Error:"</span>, err);
+ws.<span class="t-fn">onclose</span>   = ()    =&gt; console.<span class="t-fn">log</span>(<span class="t-str">"Connection closed"</span>);</pre>
+            </div>
+          </div>
+          <div class="ws-tab-panel" data-panel="py">
+            <div class="ws-code-block">
+              <button class="ws-copy-btn" onclick="wsCopy(this)">Copy</button>
+              <pre><span class="t-kw">import</span> asyncio
+<span class="t-kw">import</span> websockets
+
+project_id = <span class="t-str">"fly_finder"</span>
+visitor_id  = <span class="t-str">"199bd538-30a0-4921-922d-cd81dfc6f308"</span>
+session_id  = <span class="t-str">"17a6f3c6-1669-44da-862e-fc0d86f1dd29"</span>
+
+uri = <span class="t-fn">f</span><span class="t-str">"wss://app.productgenius.io/ws/platform/feed/{project_id}/{visitor_id}/{session_id}"</span>
+
+<span class="t-kw">async def</span> <span class="t-fn">main</span>():
+    <span class="t-kw">async with</span> websockets.<span class="t-fn">connect</span>(uri) <span class="t-kw">as</span> ws:
+        <span class="t-fn">print</span>(<span class="t-str">"Connected to Gray Whale feed"</span>)
+        <span class="t-kw">async for</span> message <span class="t-kw">in</span> ws:
+            <span class="t-fn">print</span>(<span class="t-str">"Received:"</span>, message)
+
+asyncio.<span class="t-fn">run</span>(<span class="t-fn">main</span>())</pre>
+            </div>
+          </div>
+          <div class="ws-tab-panel" data-panel="wscat">
+            <div class="ws-code-block">
+              <button class="ws-copy-btn" onclick="wsCopy(this)">Copy</button>
+              <pre><span class="t-cm"># Install once:</span>
+npm install -g wscat
+
+<span class="t-cm"># Connect:</span>
+wscat -c "wss://app.productgenius.io/ws/platform/feed/fly_finder/199bd538-30a0-4921-922d-cd81dfc6f308/17a6f3c6-1669-44da-862e-fc0d86f1dd29"</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 2: Request Feed ── -->
+      <div class="ws-step">
+        <div class="ws-step-header">
+          <div class="ws-step-num">2</div>
+          <h3>Request Feed with Linger Metrics</h3>
+        </div>
+        <div class="ws-callout">
+          Send a <code>socket_pagination_request</code> message to fetch the next batch of ranked items. Include <strong>linger metrics</strong> — how long each item was visible and how many times it entered the viewport — so the LIM can refine its rankings in real time.
+        </div>
+
+        <div class="ws-schema-grid">
+          <div class="ws-schema-card">
+            <div class="ws-schema-header send">&#8599; socket_pagination_request <span class="ws-schema-badge">SEND</span></div>
+            <div class="ws-schema-field">
+              <span class="sf-name">id</span>
+              <span class="sf-type">UUID string</span>
+              <span class="sf-desc">Unique ID for this request</span>
+              <span class="sf-req">required</span>
+            </div>
+            <div class="ws-schema-field">
+              <span class="sf-name">type</span>
+              <span class="sf-type">string</span>
+              <span class="sf-desc"><code>"socket_pagination_request"</code></span>
+              <span class="sf-req">required</span>
+            </div>
+            <div class="ws-schema-field">
+              <span class="sf-name">search_prompt</span>
+              <span class="sf-type">string</span>
+              <span class="sf-desc">Natural language hint to influence ranking</span>
+            </div>
+            <div class="ws-schema-field">
+              <span class="sf-name">events</span>
+              <span class="sf-type">array</span>
+              <span class="sf-desc">Linger metrics and interaction events</span>
+            </div>
+          </div>
+
+          <div class="ws-schema-card">
+            <div class="ws-schema-header nested">&#9201; Linger Metric Entry <span class="ws-schema-badge">NESTED</span></div>
+            <div class="ws-schema-field">
+              <span class="sf-name">enter_count</span>
+              <span class="sf-type">integer</span>
+              <span class="sf-desc">Times this item entered the viewport</span>
+              <span class="sf-req">required</span>
+            </div>
+            <div class="ws-schema-field">
+              <span class="sf-name">id</span>
+              <span class="sf-type">string</span>
+              <span class="sf-desc">Item's short tracking hash (from item object)</span>
+              <span class="sf-req">required</span>
+            </div>
+            <div class="ws-schema-field">
+              <span class="sf-name">time</span>
+              <span class="sf-type">float</span>
+              <span class="sf-desc">Total seconds the item was visible</span>
+              <span class="sf-req">required</span>
+            </div>
+            <div class="ws-schema-field">
+              <span class="sf-name">type</span>
+              <span class="sf-type">string</span>
+              <span class="sf-desc"><code>"gray_whale_item"</code></span>
+              <span class="sf-req">required</span>
+            </div>
+            <div class="ws-schema-field">
+              <span class="sf-note">One entry per item key (e.g. <code>"fly_001"</code>, <code>"fly_002"</code>…)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ws-tabs" data-group="step2">
+          <div class="ws-tab-bar">
+            <button class="ws-tab-btn active" data-tab="js">JavaScript</button>
+            <button class="ws-tab-btn" data-tab="py">Python</button>
+          </div>
+          <div class="ws-tab-panel active" data-panel="js">
+            <div class="ws-code-block">
+              <button class="ws-copy-btn" onclick="wsCopy(this)">Copy</button>
+              <pre>ws.<span class="t-fn">send</span>(JSON.<span class="t-fn">stringify</span>({
+  id:            crypto.<span class="t-fn">randomUUID</span>(),
+  type:          <span class="t-str">"socket_pagination_request"</span>,
+  search_prompt: <span class="t-str">"show fly_003 at the very top, first"</span>,
+  events: [{
+    event: <span class="t-str">"feed linger metrics"</span>,
+    properties: {
+      payload: {
+        <span class="t-str">"fly_001"</span>: { enter_count: <span class="t-num">1</span>, id: <span class="t-str">"3MS8"</span>, time: <span class="t-num">6.84</span>, type: <span class="t-str">"gray_whale_item"</span> },
+        <span class="t-str">"fly_002"</span>: { enter_count: <span class="t-num">1</span>, id: <span class="t-str">"27Y0"</span>, time: <span class="t-num">6.80</span>, type: <span class="t-str">"gray_whale_item"</span> },
+        <span class="t-str">"fly_003"</span>: { enter_count: <span class="t-num">1</span>, id: <span class="t-str">"96AH"</span>, time: <span class="t-num">6.88</span>, type: <span class="t-str">"gray_whale_item"</span> }
+      }
+    }
+  }]
+}));</pre>
+            </div>
+          </div>
+          <div class="ws-tab-panel" data-panel="py">
+            <div class="ws-code-block">
+              <button class="ws-copy-btn" onclick="wsCopy(this)">Copy</button>
+              <pre><span class="t-kw">import</span> json, uuid
+
+<span class="t-kw">await</span> ws.<span class="t-fn">send</span>(json.<span class="t-fn">dumps</span>({
+  <span class="t-str">"id"</span>:            <span class="t-fn">str</span>(uuid.<span class="t-fn">uuid4</span>()),
+  <span class="t-str">"type"</span>:          <span class="t-str">"socket_pagination_request"</span>,
+  <span class="t-str">"search_prompt"</span>: <span class="t-str">"show fly_003 at the very top, first"</span>,
+  <span class="t-str">"events"</span>: [{
+    <span class="t-str">"event"</span>: <span class="t-str">"feed linger metrics"</span>,
+    <span class="t-str">"properties"</span>: {
+      <span class="t-str">"payload"</span>: {
+        <span class="t-str">"fly_001"</span>: {<span class="t-str">"enter_count"</span>: <span class="t-num">1</span>, <span class="t-str">"id"</span>: <span class="t-str">"3MS8"</span>, <span class="t-str">"time"</span>: <span class="t-num">6.84</span>, <span class="t-str">"type"</span>: <span class="t-str">"gray_whale_item"</span>},
+        <span class="t-str">"fly_002"</span>: {<span class="t-str">"enter_count"</span>: <span class="t-num">1</span>, <span class="t-str">"id"</span>: <span class="t-str">"27Y0"</span>, <span class="t-str">"time"</span>: <span class="t-num">6.80</span>, <span class="t-str">"type"</span>: <span class="t-str">"gray_whale_item"</span>},
+        <span class="t-str">"fly_003"</span>: {<span class="t-str">"enter_count"</span>: <span class="t-num">1</span>, <span class="t-str">"id"</span>: <span class="t-str">"96AH"</span>, <span class="t-str">"time"</span>: <span class="t-num">6.88</span>, <span class="t-str">"type"</span>: <span class="t-str">"gray_whale_item"</span>}
+      }
+    }
+  }]
+}))</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 3: Ping Keepalive ── -->
+      <div class="ws-step">
+        <div class="ws-step-header">
+          <div class="ws-step-num">3</div>
+          <h3>Keepalive Ping</h3>
+        </div>
+        <div class="ws-callout warn">
+          <strong>&#9888; Timeout:</strong> The connection automatically closes after <strong>2 minutes</strong> of inactivity. Send a ping at least once every 90 seconds to keep it open.
+        </div>
+
+        <div class="ws-schema-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 360px));">
+          <div class="ws-schema-card">
+            <div class="ws-schema-header keepalive">&#128308; ping <span class="ws-schema-badge">KEEPALIVE</span></div>
+            <div class="ws-schema-field">
+              <span class="sf-name">type</span>
+              <span class="sf-type">string</span>
+              <span class="sf-desc"><code>"ping"</code> — that's the entire payload</span>
+              <span class="sf-req">required</span>
+            </div>
+            <div class="ws-schema-field" style="background:#fff8f0;">
+              <span class="sf-note">Send every ~90 seconds. Server closes connection after 2 min idle.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ws-tabs" data-group="step3">
+          <div class="ws-tab-bar">
+            <button class="ws-tab-btn active" data-tab="js">JavaScript</button>
+            <button class="ws-tab-btn" data-tab="py">Python</button>
+          </div>
+          <div class="ws-tab-panel active" data-panel="js">
+            <div class="ws-code-block">
+              <button class="ws-copy-btn" onclick="wsCopy(this)">Copy</button>
+              <pre><span class="t-cm">// Send a ping every 90 seconds</span>
+<span class="t-kw">const</span> keepAlive = <span class="t-fn">setInterval</span>(() =&gt; {
+  <span class="t-kw">if</span> (ws.readyState === WebSocket.OPEN) {
+    ws.<span class="t-fn">send</span>(JSON.<span class="t-fn">stringify</span>({ type: <span class="t-str">"ping"</span> }));
+  }
+}, <span class="t-num">90_000</span>);
+
+<span class="t-cm">// Clean up on close</span>
+ws.<span class="t-fn">onclose</span> = () =&gt; <span class="t-fn">clearInterval</span>(keepAlive);</pre>
+            </div>
+          </div>
+          <div class="ws-tab-panel" data-panel="py">
+            <div class="ws-code-block">
+              <button class="ws-copy-btn" onclick="wsCopy(this)">Copy</button>
+              <pre><span class="t-kw">import</span> asyncio, json
+
+<span class="t-kw">async def</span> <span class="t-fn">keepalive</span>(ws):
+    <span class="t-kw">while True</span>:
+        <span class="t-kw">await</span> asyncio.<span class="t-fn">sleep</span>(<span class="t-num">90</span>)
+        <span class="t-kw">await</span> ws.<span class="t-fn">send</span>(json.<span class="t-fn">dumps</span>({<span class="t-str">"type"</span>: <span class="t-str">"ping"</span>}))
+
+<span class="t-cm"># Run alongside your message handler:</span>
+asyncio.<span class="t-fn">create_task</span>(<span class="t-fn">keepalive</span>(ws))</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 4: Live Console ── -->
+      <div class="ws-step">
+        <div class="ws-step-header">
+          <div class="ws-step-num special">&#9889;</div>
+          <h3>Try It Live</h3>
+        </div>
+        <div class="ws-callout">
+          Enter your credentials below and connect directly to the Gray Whale WebSocket. Pre-filled values use the example project — replace with your own to test against live data.
+        </div>
+
+        <div class="ws-console">
+          <div class="ws-console-header">
+            <span class="ws-console-title">WebSocket Console</span>
+            <div class="ws-status-row">
+              <div class="ws-dot" id="wsDot"></div>
+              <span id="wsStatusText">Disconnected</span>
+            </div>
+          </div>
+          <div class="ws-console-inputs">
+            <div class="ws-input-group">
+              <label>project_id</label>
+              <input type="text" id="wsProjectId" value="fly_finder" spellcheck="false">
+            </div>
+            <div class="ws-input-group">
+              <label>visitor_id</label>
+              <input type="text" id="wsVisitorId" value="199bd538-30a0-4921-922d-cd81dfc6f308" spellcheck="false">
+            </div>
+            <div class="ws-input-group">
+              <label>session_id</label>
+              <input type="text" id="wsSessionId" value="17a6f3c6-1669-44da-862e-fc0d86f1dd29" spellcheck="false">
+            </div>
+          </div>
+          <div class="ws-console-actions">
+            <button class="ws-btn ws-btn-primary"   id="wsBtnConnect"    onclick="gwWS.connect()">Connect</button>
+            <button class="ws-btn ws-btn-secondary" id="wsBtnFeed"       onclick="gwWS.sendFeedRequest()" disabled>Send Feed Request</button>
+            <button class="ws-btn ws-btn-secondary" id="wsBtnPing"       onclick="gwWS.ping()" disabled>Ping</button>
+            <button class="ws-btn ws-btn-danger"    id="wsBtnDisconnect" onclick="gwWS.disconnect()" disabled>Disconnect</button>
+            <button class="ws-btn ws-btn-ghost"     onclick="gwWS.clearLog()">Clear Log</button>
+          </div>
+          <div class="ws-console-log" id="wsLog">
+            <div class="ws-log-line system">
+              <span class="ws-log-time">--:--:--</span>
+              <span class="ws-log-icon">&#9432;</span>
+              <span class="ws-log-msg">Ready. Fill in your credentials above and click Connect.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /#websocket-docs -->
+
+    <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+    <script>
+      /* ── Swagger UI init ── */
+      const methodOrder = { post: 0, get: 1, put: 2, delete: 3, patch: 4, options: 5, head: 6, trace: 7 };
+      const ui = SwaggerUIBundle({
+        url: './openapi.json',
+        dom_id: "#swagger-ui",
+        layout: "BaseLayout",
+        deepLinking: true,
+        showExtensions: true,
+        showCommonExtensions: true,
+        defaultModelsExpandDepth: -1,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIBundle.SwaggerUIStandalonePreset
+        ],
+      });
+
+      /* ── Tab switcher ── */
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.ws-tab-bar').forEach(bar => {
+          bar.querySelectorAll('.ws-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const group = bar.closest('.ws-tabs');
+              bar.querySelectorAll('.ws-tab-btn').forEach(b => b.classList.remove('active'));
+              group.querySelectorAll('.ws-tab-panel').forEach(p => p.classList.remove('active'));
+              btn.classList.add('active');
+              group.querySelector(`[data-panel="${btn.dataset.tab}"]`).classList.add('active');
+            });
+          });
+        });
+      });
+
+      /* ── Copy button ── */
+      function wsCopy(btn) {
+        const pre = btn.nextElementSibling;
+        navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+        });
+      }
+
+      /* ── Live WebSocket console ── */
+      const gwWS = {
+        socket: null,
+
+        _time() {
+          return new Date().toLocaleTimeString('en-US', { hour12: false });
+        },
+
+        log(msg, type = 'system') {
+          const log  = document.getElementById('wsLog');
+          const line = document.createElement('div');
+          line.className = `ws-log-line ${type}`;
+          const icons = { sent: '&#8599;', received: '&#8592;', system: '&#9432;', error: '&#10005;' };
+          line.innerHTML =
+            `<span class="ws-log-time">${this._time()}</span>` +
+            `<span class="ws-log-icon">${icons[type] || '›'}</span>` +
+            `<span class="ws-log-msg">${msg}</span>`;
+          log.appendChild(line);
+          log.scrollTop = log.scrollHeight;
+        },
+
+        setStatus(state) {
+          const dot  = document.getElementById('wsDot');
+          const text = document.getElementById('wsStatusText');
+          const map  = {
+            disconnected: ['', 'Disconnected'],
+            connecting:   ['connecting', 'Connecting…'],
+            connected:    ['connected',  'Connected'],
+            error:        ['error',       'Error'],
+          };
+          const [cls, label] = map[state] || map.disconnected;
+          dot.className  = `ws-dot ${cls}`;
+          text.textContent = label;
+        },
+
+        setButtons(connected) {
+          document.getElementById('wsBtnConnect').disabled    =  connected;
+          document.getElementById('wsBtnFeed').disabled       = !connected;
+          document.getElementById('wsBtnPing').disabled       = !connected;
+          document.getElementById('wsBtnDisconnect').disabled = !connected;
+        },
+
+        connect() {
+          const pid = document.getElementById('wsProjectId').value.trim();
+          const vid = document.getElementById('wsVisitorId').value.trim();
+          const sid = document.getElementById('wsSessionId').value.trim();
+          if (!pid || !vid || !sid) {
+            this.log('Please fill in all three credential fields.', 'error');
+            return;
+          }
+          const url = `wss://app.productgenius.io/ws/platform/feed/${pid}/${vid}/${sid}`;
+          this.log(`Connecting to: ${url}`, 'system');
+          this.setStatus('connecting');
+
+          this.socket = new WebSocket(url);
+
+          this.socket.onopen = () => {
+            this.setStatus('connected');
+            this.setButtons(true);
+            this.log('Connection established.', 'system');
+          };
+          this.socket.onmessage = (e) => {
+            let display;
+            try { display = JSON.stringify(JSON.parse(e.data), null, 2); }
+            catch { display = e.data; }
+            this.log(display, 'received');
+          };
+          this.socket.onerror = () => {
+            this.setStatus('error');
+            this.log('Connection error. Check your credentials and network.', 'error');
+          };
+          this.socket.onclose = (e) => {
+            this.setStatus('disconnected');
+            this.setButtons(false);
+            this.log(`Connection closed (code ${e.code}).`, 'system');
+          };
+        },
+
+        _send(payload) {
+          if (!this.socket || this.socket.readyState !== WebSocket.OPEN) {
+            this.log('Not connected.', 'error');
+            return;
+          }
+          this.socket.send(JSON.stringify(payload));
+          this.log(JSON.stringify(payload, null, 2), 'sent');
+        },
+
+        sendFeedRequest() {
+          this._send({
+            id:            crypto.randomUUID(),
+            type:          'socket_pagination_request',
+            search_prompt: 'show my top recommendations',
+            events: [{
+              event: 'feed linger metrics',
+              properties: {
+                payload: {
+                  'fly_001': { enter_count: 1, id: '3MS8', time: 6.84, type: 'gray_whale_item' },
+                  'fly_002': { enter_count: 1, id: '27Y0', time: 6.80, type: 'gray_whale_item' },
+                  'fly_003': { enter_count: 1, id: '96AH', time: 6.88, type: 'gray_whale_item' },
+                },
+              },
+            }],
+          });
+        },
+
+        ping() {
+          this._send({ type: 'ping' });
+        },
+
+        disconnect() {
+          if (this.socket) { this.socket.close(); this.socket = null; }
+        },
+
+        clearLog() {
+          document.getElementById('wsLog').innerHTML = '';
+        },
+      };
+    </script>
+  </body>
+</html>
