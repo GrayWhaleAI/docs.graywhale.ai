@@ -53,6 +53,46 @@
                 "title": "PlatformProjectModel",
                 "type": "object"
             },
+            "HackathonProjectModel": {
+                "example": {
+                    "project_name": "fly_finder",
+                    "project_summary": "Fly Finder is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences—whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, Fly Finder dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job.",
+                    "hacker_email": "john.smith@graywhale.ai",
+                    "first_name": "John",
+                    "last_name": "Smith"
+                },
+                "properties": {
+                    "first_name": {
+                        "default": "",
+                        "title": "First Name",
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "default": "",
+                        "title": "Last Name",
+                        "type": "string"
+                    },
+                    "hacker_email": {
+                        "default": "",
+                        "title": "Hacker Email",
+                        "type": "string"
+                    },
+                    "project_name": {
+                        "title": "Project Name",
+                        "type": "string"
+                    },
+                    "project_summary": {
+                        "default": "",
+                        "title": "Project Summary",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "project_name"
+                ],
+                "title": "HackathonProjectModel",
+                "type": "object"
+            },
             "SecretPlatformProjectModel": {
                 "example": {
                     "access_token": "abc123...",
@@ -647,22 +687,28 @@
         },
         "securitySchemes": {
             "auth": {
-                "type": "apiKey",
-                "in": "header",
-                "name": "Authorization"
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "Project Token"
+            },
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic",
+                "description": "Username and Password provided by DevCamp (only required for project creation)"
             }
         }
     },
     "paths": {
         "/hackathon/project/create": {
             "post": {
-                "description": "Create a new Gray Whale project.\n\nThe `project_name` will serve as a unique identifier for the project throughout the Gray Whale system. Any project names that conflict with existing projects will be rejected.\n\nRequest Body:\n- `project_name` (str): A unique name for the project. This will be used as an identifier for all subsequent interactions related to your project.\n- `project_summary` (str): A detailed description of the project. This should include the project's goals, features, and any other relevant information. The more information you provide, the better your model will perform.\n- `owner_email` (str): An email address where notifications will be sent once your model is ready.\n- `first_name` (Optional[str]): The first name of the project owner.\n- `last_name` (Optional[str]): The last name of the project owner.\n\nReturns:\n- SecretPlatformProjectModel: An object containing the project details and access token needed for further development.",
+                "description": "Create a new Gray Whale project.\n\nThe `project_name` will serve as a unique identifier for the project throughout the Gray Whale system. Any project names that conflict with existing projects will be rejected.\n\nRequest Body:\n- `project_name` (str): A unique name for the project. This will be used as an identifier for all subsequent interactions related to your project.\n- `project_summary` (str): A detailed description of the project. This should include the project's goals, features, and any other relevant information. The more information you provide, the better your model will perform.\n- `hacker_email` (str): An email address where notifications will be sent once your model is ready.\n- `first_name` (Optional[str]): The first name of the project owner.\n- `last_name` (Optional[str]): The last name of the project owner.\n\nReturns:\n- SecretPlatformProjectModel: An object containing the project details and access token needed for further development.",
                 "operationId": "create_project_post",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/PlatformProjectModel"
+                                "$ref": "#/components/schemas/HackathonProjectModel"
                             }
                         }
                     },
@@ -692,7 +738,7 @@
                 },
                 "security": [
                     {
-                        "auth": []
+                        "basicAuth": []
                     }
                 ],
                 "summary": "Create a Gray Whale Project",
