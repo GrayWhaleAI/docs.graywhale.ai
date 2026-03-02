@@ -1,0 +1,2133 @@
+{
+    "components": {
+        "schemas": {
+            "AbstractInterestProperties": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "organization_id": {
+                        "title": "Organization Id",
+                        "type": "string"
+                    },
+                    "session_id": {
+                        "title": "Session Id",
+                        "type": "string"
+                    },
+                    "visitor_id": {
+                        "title": "Visitor Id",
+                        "type": "string"
+                    },
+                    "weight": {
+                        "title": "Weight",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "organization_id",
+                    "visitor_id",
+                    "session_id",
+                    "id",
+                    "weight"
+                ],
+                "title": "AbstractInterestProperties",
+                "type": "object"
+            },
+            "Event": {
+                "properties": {
+                    "event": {
+                        "title": "Event",
+                        "type": "string"
+                    },
+                    "properties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/LingerEventProperties"
+                            },
+                            {
+                                "$ref": "#/components/schemas/AbstractInterestProperties"
+                            }
+                        ],
+                        "title": "Properties"
+                    }
+                },
+                "required": [
+                    "event",
+                    "properties"
+                ],
+                "title": "Event",
+                "type": "object"
+            },
+            "facetchat__routers__hackathon__hackathon__ProjectUpdate": {
+                "example": {
+                    "first_name": "Chelsey",
+                    "hacker_email": "chelsey@grawhale.ai",
+                    "last_name": "Rush",
+                    "project_summary": "A new summary for the project..."
+                },
+                "properties": {
+                    "first_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "First Name"
+                    },
+                    "hacker_email": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Hacker Email"
+                    },
+                    "last_name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Last Name"
+                    },
+                    "project_summary": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Project Summary"
+                    }
+                },
+                "title": "ProjectUpdate",
+                "type": "object"
+            },
+            "facetchat__routers__hackathon__model__GeniusModel": {
+                "example": {
+                    "accuracy": 0.968,
+                    "created_at": "2025-01-01 23:59:59.999999",
+                    "id": "328323b1-f6e0-45af-be85-80cc6db375a1",
+                    "instructions": [
+                        {
+                            "created_at": "2025-01-01 23:59:59.999999",
+                            "id": "06dd55ec-c465-4951-98a3-5af4c26a2cb9",
+                            "promptlet": "Someone browsing for dry flies is highly likely to be interested in other dry flies. While they may be interested in targeting other species, they are most likely pursuing trout and should be recommended other trout dry flies."
+                        }
+                    ],
+                    "status": "completed"
+                },
+                "properties": {
+                    "accuracy": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Accuracy"
+                    },
+                    "created_at": {
+                        "format": "date-time",
+                        "title": "Created At",
+                        "type": "string"
+                    },
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "instructions": {
+                        "items": {
+                            "$ref": "#/components/schemas/facetchat__routers__hackathon__model__GeniusModelInstruction"
+                        },
+                        "title": "Instructions",
+                        "type": "array"
+                    },
+                    "status": {
+                        "title": "Status",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "created_at",
+                    "instructions",
+                    "status",
+                    "accuracy"
+                ],
+                "title": "GeniusModel",
+                "type": "object"
+            },
+            "facetchat__routers__hackathon__model__GeniusModelInstruction": {
+                "example": {
+                    "created_at": "2025-01-01 23:59:59.999999",
+                    "enabled": true,
+                    "id": "06dd55ec-c465-4951-98a3-5af4c26a2cb9",
+                    "promptlet": "Someone browsing for dry flies is highly likely to be interested in other dry flies. While they may be interested in targeting other species, they are most likely pursuing trout and should be recommended other trout dry flies.",
+                    "source": "manual"
+                },
+                "properties": {
+                    "created_at": {
+                        "format": "date-time",
+                        "title": "Created At",
+                        "type": "string"
+                    },
+                    "enabled": {
+                        "default": true,
+                        "title": "Enabled",
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "promptlet": {
+                        "title": "Promptlet",
+                        "type": "string"
+                    },
+                    "source": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/InstructionSource"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "created_at",
+                    "promptlet"
+                ],
+                "title": "GeniusModelInstruction",
+                "type": "object"
+            },
+            "facetchat__routers__hackathon__model__GeniusModelInstructionSubmission": {
+                "example": {
+                    "promptlet": "Someone browsing for dry flies is highly likely to be interested in other dry flies. While they may be interested in targeting other species, they are most likely pursuing trout and should be recommended other trout dry flies."
+                },
+                "properties": {
+                    "promptlet": {
+                        "title": "Promptlet",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "promptlet"
+                ],
+                "title": "GeniusModelInstructionSubmission",
+                "type": "object"
+            },
+            "FeedPayload": {
+                "description": "Additional parameters that can be used to curtail the next batch of recommendations.",
+                "example": {
+                    "batch_count": 10,
+                    "events": [
+                        {
+                            "event": "abstract interest",
+                            "properties": {
+                                "id": "02J0",
+                                "organization_id": "fly_finder",
+                                "session_id": "d9a510fb-10a9-4c76-981e-9988559142f8",
+                                "visitor_id": "6ee0e958-adb0-49b4-8415-31556bef71e9",
+                                "weight": 4
+                            }
+                        },
+                        {
+                            "event": "abstract interest",
+                            "properties": {
+                                "id": "96AH",
+                                "organization_id": "fly_finder",
+                                "session_id": "d9a510fb-10a9-4c76-981e-9988559142f8",
+                                "visitor_id": "6ee0e958-adb0-49b4-8415-31556bef71e9",
+                                "weight": -1
+                            }
+                        },
+                        {
+                            "event": "feed linger metrics",
+                            "properties": {
+                                "organization_id": "fly_finder",
+                                "payload": {
+                                    "2f48fa05-3089-483a-bd2e-a75bc4d1ba40": {
+                                        "enter_count": 1,
+                                        "id": "3MS8",
+                                        "time": 6.84,
+                                        "type": "product_detail_card"
+                                    },
+                                    "9bc3bfb0-5ef8-4594-aa85-93c36afd1188": {
+                                        "enter_count": 1,
+                                        "id": "27Y0",
+                                        "time": 6.8,
+                                        "type": "product_detail_card"
+                                    },
+                                    "ba54faeb-040b-4227-a052-8983242b02bd": {
+                                        "enter_count": 1,
+                                        "id": "96AH",
+                                        "time": 6.88,
+                                        "type": "product_detail_card"
+                                    }
+                                },
+                                "session_id": "d9a510fb-10a9-4c76-981e-9988559142f8",
+                                "visitor_id": "6ee0e958-adb0-49b4-8415-31556bef71e9"
+                            }
+                        }
+                    ],
+                    "page": 2,
+                    "search_prompt": "Show my the best flies to take on a fly fishing trip to the Kern River in mid-June"
+                },
+                "properties": {
+                    "batch_count": {
+                        "default": 10,
+                        "title": "Batch Count",
+                        "type": "integer"
+                    },
+                    "events": {
+                        "default": [],
+                        "items": {
+                            "$ref": "#/components/schemas/Event"
+                        },
+                        "title": "Events",
+                        "type": "array"
+                    },
+                    "page": {
+                        "default": 1,
+                        "title": "Page",
+                        "type": "integer"
+                    },
+                    "search_prompt": {
+                        "default": "",
+                        "title": "Search Prompt",
+                        "type": "string"
+                    }
+                },
+                "title": "FeedPayload",
+                "type": "object"
+            },
+            "GeniusItem": {
+                "example": {
+                    "description": "A classic dry fly pattern that imitates a wide range of mayflies. Known for its versatility, it's effective in various water conditions and is a staple in any angler's fly box.",
+                    "external_url": "https://www.orvis.com/product/adams-parachute-dry-fly/0356.html",
+                    "id": "fly_001",
+                    "image_url": "https://assets.orvis.com/is/image/orvisprd/0356699W_?wid=1280&src=is($object$:1-1)",
+                    "metadata": [
+                        {
+                            "name": "fly_category",
+                            "value": "dry_fly"
+                        },
+                        {
+                            "name": "target_species",
+                            "value": "trout"
+                        },
+                        {
+                            "name": "best_conditions",
+                            "value": "calm water, mayfly hatches"
+                        },
+                        {
+                            "name": "fly_size",
+                            "value": "14"
+                        },
+                        {
+                            "name": "color",
+                            "value": "gray"
+                        },
+                        {
+                            "name": "hook",
+                            "value": "size 12"
+                        },
+                        {
+                            "name": "water_type",
+                            "value": "freshwater"
+                        }
+                    ],
+                    "title": "Adams Dry Fly"
+                },
+                "properties": {
+                    "description": {
+                        "title": "Description",
+                        "type": "string"
+                    },
+                    "external_url": {
+                        "title": "External Url",
+                        "type": "string"
+                    },
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "image_url": {
+                        "title": "Image Url",
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "default": [],
+                        "items": {
+                            "$ref": "#/components/schemas/GeniusItemTag"
+                        },
+                        "title": "Metadata",
+                        "type": "array"
+                    },
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "title",
+                    "description",
+                    "image_url",
+                    "external_url"
+                ],
+                "title": "GeniusItem",
+                "type": "object"
+            },
+            "GeniusItemTag": {
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "value": {
+                        "title": "Value",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "title": "GeniusItemTag",
+                "type": "object"
+            },
+            "GeniusItemUpdate": {
+                "example": {
+                    "description": "A classic dry fly pattern that imitates a wide range of mayflies. Known for its versatility, it's effective in various water conditions and is a staple in any angler's fly box.",
+                    "external_url": "https://www.orvis.com/product/adams-parachute-dry-fly/0356.html",
+                    "image_url": "https://assets.orvis.com/is/image/orvisprd/0356699W_?wid=1280&src=is($object$:1-1)",
+                    "metadata": [
+                        {
+                            "name": "fly_category",
+                            "value": "dry_fly"
+                        },
+                        {
+                            "name": "target_species",
+                            "value": "trout"
+                        },
+                        {
+                            "name": "best_conditions",
+                            "value": "calm water, mayfly hatches"
+                        },
+                        {
+                            "name": "fly_size",
+                            "value": "14"
+                        },
+                        {
+                            "name": "color",
+                            "value": "gray"
+                        },
+                        {
+                            "name": "hook",
+                            "value": "size 12"
+                        },
+                        {
+                            "name": "water_type",
+                            "value": "freshwater"
+                        }
+                    ],
+                    "title": "Adams Dry Fly"
+                },
+                "properties": {
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "external_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "External Url"
+                    },
+                    "image_url": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Image Url"
+                    },
+                    "metadata": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/GeniusItemTag"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "default": [],
+                        "title": "Metadata"
+                    },
+                    "title": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Title"
+                    }
+                },
+                "title": "GeniusItemUpdate",
+                "type": "object"
+            },
+            "HackathonProjectModel": {
+                "example": {
+                    "first_name": "Chelsey",
+                    "hacker_email": "chelsey@graywhale.ai",
+                    "last_name": "Rush",
+                    "project_name": "fly_finder",
+                    "project_summary": "Fly Finder is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences\u2014whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, Fly Finder dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job."
+                },
+                "properties": {
+                    "first_name": {
+                        "default": "",
+                        "title": "First Name",
+                        "type": "string"
+                    },
+                    "hacker_email": {
+                        "default": "",
+                        "title": "Hacker Email",
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "default": "",
+                        "title": "Last Name",
+                        "type": "string"
+                    },
+                    "project_name": {
+                        "title": "Project Name",
+                        "type": "string"
+                    },
+                    "project_summary": {
+                        "default": "",
+                        "title": "Project Summary",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "project_name"
+                ],
+                "title": "HackathonProjectModel",
+                "type": "object"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "title": "Detail",
+                        "type": "array"
+                    }
+                },
+                "title": "HTTPValidationError",
+                "type": "object"
+            },
+            "InstructionSource": {
+                "description": "Source of an instruction/promptlet.\n\nUsed to distinguish between AI-generated and manually-created instructions.",
+                "enum": [
+                    "product_genius_ai",
+                    "manual"
+                ],
+                "title": "InstructionSource",
+                "type": "string"
+            },
+            "LingerEventProperties": {
+                "properties": {
+                    "organization_id": {
+                        "title": "Organization Id",
+                        "type": "string"
+                    },
+                    "payload": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/LingerPayloadItem"
+                        },
+                        "title": "Payload",
+                        "type": "object"
+                    },
+                    "session_id": {
+                        "title": "Session Id",
+                        "type": "string"
+                    },
+                    "visitor_id": {
+                        "title": "Visitor Id",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "organization_id",
+                    "visitor_id",
+                    "session_id",
+                    "payload"
+                ],
+                "title": "LingerEventProperties",
+                "type": "object"
+            },
+            "LingerPayloadItem": {
+                "properties": {
+                    "enter_count": {
+                        "title": "Enter Count",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "time": {
+                        "title": "Time",
+                        "type": "number"
+                    },
+                    "type": {
+                        "title": "Type",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "time",
+                    "id",
+                    "enter_count",
+                    "type"
+                ],
+                "title": "LingerPayloadItem",
+                "type": "object"
+            },
+            "SecretHackathonProjectModel": {
+                "example": {
+                    "access_token": "abc123...",
+                    "first_name": "Chelsey",
+                    "hacker_email": "chelsey@graywhale.ai",
+                    "last_name": "Rush",
+                    "project_name": "fly_finder",
+                    "project_summary": "Fly Finder is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences\u2014whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, Fly Finder dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job."
+                },
+                "properties": {
+                    "access_token": {
+                        "title": "Access Token",
+                        "type": "string"
+                    },
+                    "first_name": {
+                        "default": "",
+                        "title": "First Name",
+                        "type": "string"
+                    },
+                    "hacker_email": {
+                        "default": "",
+                        "title": "Hacker Email",
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "default": "",
+                        "title": "Last Name",
+                        "type": "string"
+                    },
+                    "project_name": {
+                        "title": "Project Name",
+                        "type": "string"
+                    },
+                    "project_summary": {
+                        "default": "",
+                        "title": "Project Summary",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "project_name",
+                    "access_token"
+                ],
+                "title": "SecretHackathonProjectModel",
+                "type": "object"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "title": "Location",
+                        "type": "array"
+                    },
+                    "msg": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "Error Type",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError",
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "auth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization",
+                "description": "Project Token"
+            },
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic",
+                "description": "Username and Password provided by DevCamp (only required for project creation)"
+            }
+        }
+    },
+    "info": {
+        "description": "## Start Building Your Custom LIM!\n\nThis API is designed to provide everything you need to launch an awesome, self-learning feed using Gray Whale AI's Large Interaction Models (LIMs)! We've got you covered from onboarding to deployment and everything in between.\n\nIf you'd like some additional information, head over to the [Hackathon Documentation](https://gamalon.github.io/genius-hackathon-documentation/) to learn more.",
+        "title": "Gray Whale API",
+        "version": "0.1.0"
+    },
+    "openapi": "3.1.0",
+    "servers": [
+        {
+            "url": "https://app.productgenius.io",
+            "description": "Production"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Onboarding",
+            "description": "Create and configure your Gray Whale project. Start here to set up your project, manage access tokens, and update project details."
+        },
+        {
+            "name": "Items",
+            "description": "Manage the catalog of items that will be recommended in your feed. Add, update, retrieve, and delete items with rich metadata to power your recommendations."
+        },
+        {
+            "name": "Instructions",
+            "description": "Define instructions and rules that guide your recommendation model. Create promptlets that teach your LIM how to make better recommendations based on your domain."
+        },
+        {
+            "name": "Model Management",
+            "description": "Build, evaluate, and deploy recommendation models. Trigger model builds, review model performance, and promote models to production."
+        },
+        {
+            "name": "Feed",
+            "description": "Retrieve personalized recommendations for your users. Generate dynamic, self-learning feeds that adapt to user behavior in real-time."
+        }
+    ],
+    "paths": {
+        "/hackathon/project/create": {
+            "post": {
+                "description": "Create a new Gray Whale project. Welcome to the team!\n\nThe `project_name` will serve as a unique identifier for the project throughout\nthe Gray Whale system. Any project names that conflict with existing projects or customers\nwill be rejected.\n\nRequest Body:\n- `project_name` (str): A unique name for the project. This will be used as an\n    identifier for all subsequent interactions related to your project.\n- `project_summary` (str): A detailed description of the project. This should\n    include the project's goals, features, and any other relevant information.\n    The more information you provide, the better your model will perform.\n- `hacker_email` (str): An email address where notifications will be sent once\n    your model is ready.\n- `first_name` (Optional(str)): The first name of the developer.\n- `last_name` (Optional(str)): The last name of the developer.\n\nReturns:\n- SecretHackathonProjectModel: An object containing the details and access token needed for further development of the project.",
+                "operationId": "create_project_hackathon_project_create_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HackathonProjectModel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SecretHackathonProjectModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "summary": "Create a Gray Whale Project",
+                "tags": [
+                    "Onboarding"
+                ]
+            }
+        },
+        "/hackathon/project/{project_name}": {
+            "get": {
+                "description": "Retrieve details of a specific Gray Whale project.\n\nParameters:\n- `project_name` (str): The unique name of the project to retrieve.\n\nReturns:\n- HackathonProjectModel: An object containing the project's name, summary, and hacker's email.",
+                "operationId": "get_project_hackathon_project__project_name__get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HackathonProjectModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get Project",
+                "tags": [
+                    "Onboarding"
+                ]
+            }
+        },
+        "/hackathon/project/{project_name}/update": {
+            "put": {
+                "description": "Update an existing project to modify the project summary or project owner email.\n\nParameters:\n- `project_name`: The unique name of the project to update.\n\nRequest Body:\n- `project_summary` (Optional(str)): A new summary for the project.\n- `hacker_email` (Optional(str)): A new email address for the hacker.\n- `first_name` (Optional(str)): A new first name for the hacker.\n- `last_name` (Optional(str)): A new last name for the hacker.\n\nReturns:\n- HackathonProjectModel: An object containing the updated details of the project.",
+                "operationId": "update_project_hackathon_project__project_name__update_put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/facetchat__routers__hackathon__hackathon__ProjectUpdate"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HackathonProjectModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Update Project",
+                "tags": [
+                    "Onboarding"
+                ]
+            }
+        },
+        "/hackathon/project/{project_name}/token": {
+            "get": {
+                "description": "Send the project access token to the project owner's email.\n\nThis is the only way to retrieve the project access token after it is created.\n\nParameters:\n- `project_name`: The unique name of the project to send the token to.",
+                "operationId": "send_project_token_to_email_hackathon_project__project_name__token_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Response Send Project Token To Email Hackathon Project  Project Name  Token Get",
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Send Project Token To Email",
+                "tags": [
+                    "Onboarding"
+                ]
+            }
+        },
+        "/hackathon/project/{project_name}/items/create": {
+            "post": {
+                "description": "Create new items for a specific project. These are what will be served in your feed, they are the core of your project.\nProvide as much detail and information as possible, as this will allow your model to make the best possible recommendations.\n\nParameters:\n- `project_name` (str): The unique name of the project to which the items will be added.\n\nRequest Body:\n- List[GeniusItem]: A list of GrayWhaleItem objects to be created. Each object should contain the following parameters:\n    - `id` (Optional): A unique identifier for the item. If you do not provide an ID, a UUID will be generated for each item for you.\n    - `title`: A descriptive title for the item.\n    - `description`: A detailed description of the item. Verbosity is key to success - this will be used in our backend AI processes to establish the interconnections between your model items.\n    - `image_url`: The URL of the item's image to be displayed in your feed. This must resolve to an actual image.\n    - `external_url`: The URL where the item can be found externally. This must resolve to an actual URL.\n    - `metadata`: A list of key-value pairs associated with the item for specifying additional information. These will also be used by your AI model to drive visitor behavior, so be sure to make all key names are very descriptive.\n\nReturns:\n- List[Item]: A list of Item objects representing the created items.",
+                "operationId": "create_item_hackathon_project__project_name__items_create_post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "items": {
+                                    "$ref": "#/components/schemas/GeniusItem"
+                                },
+                                "title": "Item Creation",
+                                "type": "array"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/GeniusItem"
+                                    },
+                                    "title": "Response Create Item Hackathon Project  Project Name  Items Create Post",
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Create Item",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/hackathon/project/{project_name}/items/list": {
+            "get": {
+                "description": "List the items for a specific Gray Whale project.\n\nParameters:\n- `project_name` (str): The unique name of the project for which to list items.\n- `page` (int, optional): The page number to retrieve. Defaults to 1.\n- `count` (int, optional): The number of items to retrieve per page. Defaults to 10.\n\nReturns:\n- List[Item]: A list of Item objects.",
+                "operationId": "list_items_hackathon_project__project_name__items_list_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "default": 1,
+                            "title": "Page",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "count",
+                        "required": false,
+                        "schema": {
+                            "default": 10,
+                            "title": "Count",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/GeniusItem"
+                                    },
+                                    "title": "Response List Items Hackathon Project  Project Name  Items List Get",
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "List Items",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/hackathon/project/{project_name}/items/{item_id}": {
+            "get": {
+                "description": "Retrieve details of a specific item from a Gray Whale project.\n\nParameters:\n- `project_name` (str): The unique name of the project to which the item belongs.\n- `item_id` (str): The unique identifier of the item to retrieve.\n\nReturns:\n- Item: An object containing the details of the requested item,\n  including its title, description, image URL, external URL, and associated metadata.",
+                "operationId": "get_item_hackathon_project__project_name__items__item_id__get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "item_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Item Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GeniusItem"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get Item",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/hackathon/project/{project_name}/items/{item_id}/update": {
+            "put": {
+                "description": "Update an existing item for a specific Gray Whale project.\n\nParameters:\n- `project_name` (str): The unique name of the project to which the item belongs.\n- `item_id` (str): The unique identifier of the item to update.\n\nRequest Body:\n- GrayWhaleItemUpdate: An object containing the fields to update. Each field is optional:\n    - `title`: A new title for the item.\n    - `description`: A new description for the item.\n    - `image_url`: A new image URL for the item.\n    - `external_url`: A new external URL for the item.\n    - `metadata`: A new list of key-value pairs associated with the item.\n\nReturns:\n- GrayWhaleItem: An object containing the updated details of the item.",
+                "operationId": "update_item_hackathon_project__project_name__items__item_id__update_put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "item_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Item Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GeniusItemUpdate"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GeniusItem"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Update Item",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/hackathon/project/{project_name}/items/{item_id}/delete": {
+            "delete": {
+                "description": "Delete a specific item from a Gray Whale project. This will remove the item from the project and any future feeds.\n\nParameters:\n- `project_name` (str): The unique name of the project to which the item belongs.\n- `item_id` (str): The unique identifier of the item to delete.",
+                "operationId": "delete_item_hackathon_project__project_name__items__item_id__delete_delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "item_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Item Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Delete Item",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/instruction/create": {
+            "post": {
+                "description": "Submit a list of instructions for a hackathon project.\n\nParameters:\n- `project_name`: The unique name of the project.\n\nRequest Body:\n- `instructions`: A list of instructions to submit. Each instruction has the form:\n    - `promptlet`: The promptlet text to submit.\n\nReturns:\n- List[GrayWhaleModelInstruction]: A list of instructions associated with the specified project.",
+                "operationId": "submit_instructions_hackathon__project_name__model_instruction_create_post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "items": {
+                                    "$ref": "#/components/schemas/facetchat__routers__hackathon__model__GeniusModelInstructionSubmission"
+                                },
+                                "title": "Instructions",
+                                "type": "array"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Submit Instructions",
+                "tags": [
+                    "Instructions"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/instruction/list": {
+            "get": {
+                "description": "Retrieve a list of instructions for a specific hackathon project.\n\nParameters:\n- `project_name`: The unique name of the project for which to list instructions.\n\nReturns:\n- List[GrayWhaleModelInstruction]: A list of instructions associated with the specified project.",
+                "operationId": "list_instructions_hackathon__project_name__model_instruction_list_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/facetchat__routers__hackathon__model__GeniusModelInstruction"
+                                    },
+                                    "title": "Response List Instructions Hackathon  Project Name  Model Instruction List Get",
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "List Instructions",
+                "tags": [
+                    "Instructions"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/instruction/{promptlet_id}": {
+            "get": {
+                "description": "Retrieve a specific instruction for a hackathon project.\n\nParameters:\n- `project_name`: The unique name of the project.\n- `promptlet_id`: The unique identifier of the instruction to retrieve.\n\nReturns:\n- GrayWhaleModelInstruction: The instruction associated with the specified project and promptlet ID.",
+                "operationId": "get_instruction_hackathon__project_name__model_instruction__promptlet_id__get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "promptlet_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Promptlet Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get Instruction",
+                "tags": [
+                    "Instructions"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/instruction/{promptlet_id}/update": {
+            "put": {
+                "description": "Update an existing instruction for a hackathon project.\n\nParameters:\n- `project_name`: The unique name of the project.\n- `promptlet_id`: The unique identifier of the instruction to update.\n\nRequest Body:\n- `promptlet`: The updated promptlet text.\n\nReturns:\n- GrayWhaleModelInstruction: The updated instruction associated with the specified project and promptlet ID.",
+                "operationId": "update_instruction_hackathon__project_name__model_instruction__promptlet_id__update_put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "promptlet_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Promptlet Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/facetchat__routers__hackathon__model__GeniusModelInstructionSubmission"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Update Instruction",
+                "tags": [
+                    "Instructions"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/instruction/{promptlet_id}/enable": {
+            "put": {
+                "description": "Enable or disable a specific instruction for a hackathon project.\n\nParameters:\n- `project_name`: The unique name of the project.\n- `promptlet_id`: The unique identifier of the instruction to enable/disable.\n- `enabled`: Set to true to enable, false to disable. Defaults to true.\n\nReturns:\n- GrayWhaleModelInstruction: The updated instruction.",
+                "operationId": "enable_instruction_hackathon__project_name__model_instruction__promptlet_id__enable_put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "promptlet_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Promptlet Id",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "enabled",
+                        "required": false,
+                        "schema": {
+                            "default": true,
+                            "title": "Enabled",
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Enable Instruction",
+                "tags": [
+                    "Instructions"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/instruction/{promptlet_id}/delete": {
+            "delete": {
+                "description": "Delete a specific instruction for a hackathon project. This will remove the instruction from our top-level models\ndriving visitor recommendations, but it will still impact any models you've created previously. If you wish to further\nremove this influence, you can trigger a new model build.\n\nParameters:\n- `project_name`: The unique name of the project.\n- `promptlet_id`: The unique identifier of the instruction to delete.",
+                "operationId": "delete_instruction_hackathon__project_name__model_instruction__promptlet_id__delete_delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "promptlet_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Promptlet Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Delete Instruction",
+                "tags": [
+                    "Instructions"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/create": {
+            "post": {
+                "description": "Create a new model for a hackathon project.\n\nThis will trigger a new model build. Model building can take quite some time, grab a coffee!\nIf you've entered your email address you will be notified when the model is ready.\n\nParameters:\n- `project_name`: The unique name of the project.",
+                "operationId": "create_model_hackathon__project_name__model_create_post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Create Model",
+                "tags": [
+                    "Model Management"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/list": {
+            "get": {
+                "description": "Retrieve a list of models for a specific hackathon project.\n\nParameters:\n- `project_name`: The unique name of the project.\n\nReturns:\n- List[GrayWhaleModel]: A list of models associated with the specified project.",
+                "operationId": "list_models_hackathon__project_name__model_list_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/facetchat__routers__hackathon__model__GeniusModel"
+                                    },
+                                    "title": "Response List Models Hackathon  Project Name  Model List Get",
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "List Models",
+                "tags": [
+                    "Model Management"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/{model_id}": {
+            "get": {
+                "description": "Retrieve a specific model for a hackathon project.\n\nParameters:\n- `project_name`: The unique name of the project.\n- `model_id`: The unique identifier of the model to retrieve.\n\nReturns:\n- GrayWhaleModel: The model associated with the specified project and model id.",
+                "operationId": "get_model_hackathon__project_name__model__model_id__get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "model_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Model Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/facetchat__routers__hackathon__model__GeniusModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get Model",
+                "tags": [
+                    "Model Management"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/{model_id}/promote": {
+            "post": {
+                "description": "Promote a model for a hackathon project.\n\nAny resulting feeds will source recommendations from this model that you've promoted. This allows you to\nevaluate the performance of different models and test different primary instructions. If you'd like to learn\nmore about our internal evaluations, don't hesitate to ask the Gray Whale team!\n\nParameters:\n- `project_name`: The unique name of the project.\n- `model_id`: The unique identifier of the model to promote.",
+                "operationId": "promote_model_hackathon__project_name__model__model_id__promote_post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "model_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Model Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Response Promote Model Hackathon  Project Name  Model  Model Id  Promote Post",
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Promote Model",
+                "tags": [
+                    "Model Management"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/batch/{session_id}": {
+            "post": {
+                "description": "Fetch the next group of item identifiers for a self-learning session.\n\nParameters:\n- `project_name` (str): The name of the project for which the feed is requested.\n- `session_id` (str): The identifier for the current user session.\n\n\nRequest Body:\n- `page` (Optional[int]): The page number of the feed to be returned.\n- `batch_count` (Optional[int]): The number of cards to be returned in the feed.\n- `events` (Recommended[List[Dict]]): A list of events that have occurred in the session. The client skeleton handles all of the event submission logic -\nif you are interested in designing your own client we recommend looking at that reference. In addition to linger events, you can also submit abstract interest events\nwhich act as a thumbs up/down mechanism for influencing the next batch of recommendations.\n- `search_prompt` (Optional[str]): A search prompt to be used to generate the feed. This acts as a top-level filter on the feed - searched items are prioritized over those\ninferred from the submitted events.\n\n\nReturns:\n    Dict: A dictionary containing a list of cards to be displayed in the feed. Refer to the client-side\n    implementation for displaying these card types.",
+                "operationId": "fetch_next_batch_items_hackathon__project_name__batch__session_id__post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "session_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Session Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FeedPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response Fetch Next Batch Items Hackathon  Project Name  Batch  Session Id  Post",
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Fetch Next Batch Items",
+                "tags": [
+                    "Feed"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/feed/{session_id}": {
+            "post": {
+                "description": "Fetch the next group of `Cards` for a self-learning session.\n\nThis endpoint serves as the primary delivery system for personalized recommendations\ntailored to hackathon projects. It utilizes the promoted model, session details, and\nuser-provided inputs to generate the next batch of cards.\n\nParameters:\n- `project_name` (str): The name of the project for which the feed is requested.\n- `session_id` (str): The identifier for the current user session.\n\n\nRequest Body:\n- `page` (Optional[int]): The page number of the feed to be returned.\n- `batch_count` (Optional[int]): The number of cards to be returned in the feed.\n- `events` (Recommended[List[Dict]]): A list of events that have occurred in the session. The client skeleton handles all of the event submission logic -\nif you are interested in designing your own client we recommend looking at that reference. In addition to linger events, you can also submit abstract interest events\nwhich act as a thumbs up/down mechanism for influencing the next batch of recommendations.\n- `search_prompt` (Optional[str]): A search prompt to be used to generate the feed. This acts as a top-level filter on the feed - searched items are prioritized over those\ninferred from the submitted events.\n\n\nReturns:\n    Dict: A dictionary containing a list of cards to be displayed in the feed. Refer to the client-side\n    implementation for displaying these card types.",
+                "operationId": "fetch_next_batch_cards_hackathon__project_name__feed__session_id__post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "session_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Session Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FeedPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": true,
+                                    "title": "Response Fetch Next Batch Cards Hackathon  Project Name  Feed  Session Id  Post",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Fetch Next Batch Cards",
+                "tags": [
+                    "Feed"
+                ]
+            }
+        }
+    }
+}
