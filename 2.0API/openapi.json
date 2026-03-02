@@ -1,0 +1,1960 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Gray Whale API",
+        "description": "## Build Your Custom LIM\n\nThis API provides everything you need to launch an awesome, self-learning feed using Gray Whale AI's Large Interaction Models (LIMs). We've got you covered from onboarding to deployment and everything in between.\n\nHead over to the [Platform Documentation](https://docs.graywhale.ai) to learn more. \n\n ## WebSocket Feed \n\nThis version of the Gray Whale API also supports a real-time, personalized feed via WebSocket. Scroll to the bottom of this page for the full WebSocket reference, message schemas, code examples, and an interactive live console. **If you want to use the WebSocket feed, you will need to train your model using the endpoint in this API.**",
+        "version": "0.2.0"
+    },
+    "servers": [
+        {
+            "url": "https://app.productgenius.io",
+            "description": "Production"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "PlatformProjectModel": {
+                "example": {
+                    "project_name": "fly_finder",
+                    "project_summary": "Fly Finder is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences—whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, Fly Finder dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job.",
+                    "owner_email": "john.smith@graywhale.ai",
+                    "first_name": "John",
+                    "last_name": "Smith"
+                },
+                "properties": {
+                    "first_name": {
+                        "default": "",
+                        "title": "First Name",
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "default": "",
+                        "title": "Last Name",
+                        "type": "string"
+                    },
+                    "owner_email": {
+                        "default": "",
+                        "title": "Owner Email",
+                        "type": "string"
+                    },
+                    "project_name": {
+                        "title": "Project Name",
+                        "type": "string"
+                    },
+                    "project_summary": {
+                        "default": "",
+                        "title": "Project Summary",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "project_name"
+                ],
+                "title": "PlatformProjectModel",
+                "type": "object"
+            },
+            "SecretPlatformProjectModel": {
+                "example": {
+                    "access_token": "abc123...",
+                    "project_name": "fly_finder",
+                    "project_summary": "Fly Finder is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences—whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, Fly Finder dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job.",
+                    "owner_email": "john.smith@graywhale.ai",
+                    "first_name": "John",
+                    "last_name": "Smith"
+                },
+                "properties": {
+                    "access_token": {
+                        "title": "Access Token",
+                        "type": "string"
+                    },
+                    "first_name": {
+                        "default": "",
+                        "title": "First Name",
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "default": "",
+                        "title": "Last Name",
+                        "type": "string"
+                    },
+                    "owner_email": {
+                        "default": "",
+                        "title": "Owner Email",
+                        "type": "string"
+                    },
+                    "project_name": {
+                        "title": "Project Name",
+                        "type": "string"
+                    },
+                    "project_summary": {
+                        "default": "",
+                        "title": "Project Summary",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "project_name",
+                    "access_token"
+                ],
+                "title": "SecretPlatformProjectModel",
+                "type": "object"
+            },
+            "ProjectUpdate": {
+                "example": {
+                    "first_name": "John",
+                    "last_name": "Smith",
+                    "owner_email": "john.smith@graywhale.ai",
+                    "project_summary": "A new summary for the project..."
+                },
+                "properties": {
+                    "first_name": {
+                        "anyOf": [
+                            { "type": "string" },
+                            { "type": "null" }
+                        ],
+                        "title": "First Name"
+                    },
+                    "last_name": {
+                        "anyOf": [
+                            { "type": "string" },
+                            { "type": "null" }
+                        ],
+                        "title": "Last Name"
+                    },
+                    "owner_email": {
+                        "anyOf": [
+                            { "type": "string" },
+                            { "type": "null" }
+                        ],
+                        "title": "Owner Email"
+                    },
+                    "project_summary": {
+                        "anyOf": [
+                            { "type": "string" },
+                            { "type": "null" }
+                        ],
+                        "title": "Project Summary"
+                    }
+                },
+                "title": "ProjectUpdate",
+                "type": "object"
+            },
+            "GrayWhaleItem": {
+                "example": {
+                    "id": "fly_001",
+                    "title": "Adams Dry Fly",
+                    "description": "A classic dry fly pattern that imitates a wide range of mayflies. Known for its versatility, it's effective in various water conditions and is a staple in any angler's fly box.",
+                    "image_url": "https://assets.orvis.com/is/image/orvisprd/0356699W_?wid=1280&src=is($object$:1-1)",
+                    "external_url": "https://www.orvis.com/product/adams-parachute-dry-fly/0356.html",
+                    "metadata": [
+                        { "name": "fly_category", "value": "dry_fly" },
+                        { "name": "target_species", "value": "trout" },
+                        { "name": "best_conditions", "value": "calm water, mayfly hatches" },
+                        { "name": "fly_size", "value": "14" },
+                        { "name": "color", "value": "gray" },
+                        { "name": "hook", "value": "size 12" },
+                        { "name": "water_type", "value": "freshwater" }
+                    ]
+                },
+                "properties": {
+                    "description": {
+                        "title": "Description",
+                        "type": "string"
+                    },
+                    "external_url": {
+                        "title": "External Url",
+                        "type": "string"
+                    },
+                    "id": {
+                        "anyOf": [
+                            { "type": "string" },
+                            { "type": "null" }
+                        ],
+                        "title": "Id"
+                    },
+                    "image_url": {
+                        "title": "Image Url",
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "default": [],
+                        "items": {
+                            "$ref": "#/components/schemas/GrayWhaleItemTag"
+                        },
+                        "title": "Metadata",
+                        "type": "array"
+                    },
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "title",
+                    "description",
+                    "image_url",
+                    "external_url"
+                ],
+                "title": "GrayWhaleItem",
+                "type": "object"
+            },
+            "GrayWhaleItemTag": {
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "value": {
+                        "title": "Value",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "title": "GrayWhaleItemTag",
+                "type": "object"
+            },
+            "GrayWhaleItemUpdate": {
+                "example": {
+                    "title": "Adams Dry Fly",
+                    "description": "A classic dry fly pattern that imitates a wide range of mayflies. Known for its versatility, it's effective in various water conditions and is a staple in any angler's fly box.",
+                    "image_url": "https://assets.orvis.com/is/image/orvisprd/0356699W_?wid=1280&src=is($object$:1-1)",
+                    "external_url": "https://www.orvis.com/product/adams-parachute-dry-fly/0356.html",
+                    "metadata": [
+                        { "name": "fly_category", "value": "dry_fly" },
+                        { "name": "target_species", "value": "trout" },
+                        { "name": "best_conditions", "value": "calm water, mayfly hatches" },
+                        { "name": "fly_size", "value": "14" },
+                        { "name": "color", "value": "gray" },
+                        { "name": "hook", "value": "size 12" },
+                        { "name": "water_type", "value": "freshwater" }
+                    ]
+                },
+                "properties": {
+                    "description": {
+                        "anyOf": [
+                            { "type": "string" },
+                            { "type": "null" }
+                        ],
+                        "title": "Description"
+                    },
+                    "external_url": {
+                        "anyOf": [
+                            { "type": "string" },
+                            { "type": "null" }
+                        ],
+                        "title": "External Url"
+                    },
+                    "image_url": {
+                        "anyOf": [
+                            { "type": "string" },
+                            { "type": "null" }
+                        ],
+                        "title": "Image Url"
+                    },
+                    "metadata": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/GrayWhaleItemTag"
+                                },
+                                "type": "array"
+                            },
+                            { "type": "null" }
+                        ],
+                        "default": [],
+                        "title": "Metadata"
+                    },
+                    "title": {
+                        "anyOf": [
+                            { "type": "string" },
+                            { "type": "null" }
+                        ],
+                        "title": "Title"
+                    }
+                },
+                "title": "GrayWhaleItemUpdate",
+                "type": "object"
+            },
+            "GrayWhaleModel": {
+                "example": {
+                    "accuracy": 0.968,
+                    "created_at": "2025-01-01 23:59:59.999999",
+                    "id": "328323b1-f6e0-45af-be85-80cc6db375a1",
+                    "policies": [
+                        {
+                            "created_at": "2025-01-01 23:59:59.999999",
+                            "id": "06dd55ec-c465-4951-98a3-5af4c26a2cb9",
+                            "policy": "Someone browsing for dry flies is highly likely to be interested in other dry flies. While they may be interested in targeting other species, they are most likely pursuing trout and should be recommended other trout dry flies."
+                        }
+                    ],
+                    "status": "completed"
+                },
+                "properties": {
+                    "accuracy": {
+                        "anyOf": [
+                            { "type": "number" },
+                            { "type": "null" }
+                        ],
+                        "title": "Accuracy"
+                    },
+                    "created_at": {
+                        "format": "date-time",
+                        "title": "Created At",
+                        "type": "string"
+                    },
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "policies": {
+                        "items": {
+                            "$ref": "#/components/schemas/GrayWhaleModelPolicy"
+                        },
+                        "title": "Policies",
+                        "type": "array"
+                    },
+                    "status": {
+                        "title": "Status",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "created_at",
+                    "policies",
+                    "status",
+                    "accuracy"
+                ],
+                "title": "GrayWhaleModel",
+                "type": "object"
+            },
+            "GrayWhaleModelPolicy": {
+                "example": {
+                    "created_at": "2025-01-01 23:59:59.999999",
+                    "enabled": true,
+                    "id": "06dd55ec-c465-4951-98a3-5af4c26a2cb9",
+                    "policy": "Someone browsing for dry flies is highly likely to be interested in other dry flies. While they may be interested in targeting other species, they are most likely pursuing trout and should be recommended other trout dry flies.",
+                    "source": "manual"
+                },
+                "properties": {
+                    "created_at": {
+                        "format": "date-time",
+                        "title": "Created At",
+                        "type": "string"
+                    },
+                    "enabled": {
+                        "default": true,
+                        "title": "Enabled",
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "policy": {
+                        "title": "Policy",
+                        "type": "string"
+                    },
+                    "source": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/InstructionSource"
+                            },
+                            { "type": "null" }
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "created_at",
+                    "policy"
+                ],
+                "title": "GrayWhaleModelPolicy",
+                "type": "object"
+            },
+            "GrayWhaleModelPolicySubmission": {
+                "example": {
+                    "policy": "Someone browsing for dry flies is highly likely to be interested in other dry flies. While they may be interested in targeting other species, they are most likely pursuing trout and should be recommended other trout dry flies."
+                },
+                "properties": {
+                    "policy": {
+                        "title": "Policy",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "policy"
+                ],
+                "title": "GrayWhaleModelPolicySubmission",
+                "type": "object"
+            },
+            "InstructionSource": {
+                "description": "Source of a policy.\n\nUsed to distinguish between AI-generated and manually-created policies.",
+                "enum": [
+                    "gray_whale_ai",
+                    "manual"
+                ],
+                "title": "InstructionSource",
+                "type": "string"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "title": "Detail",
+                        "type": "array"
+                    }
+                },
+                "title": "HTTPValidationError",
+                "type": "object"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                { "type": "string" },
+                                { "type": "integer" }
+                            ]
+                        },
+                        "title": "Location",
+                        "type": "array"
+                    },
+                    "msg": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "Error Type",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError",
+                "type": "object"
+            },
+            "FeedPayload": {
+                "description": "Additional parameters that can be used to curtail the next batch of recommendations.",
+                "example": {
+                    "batch_count": 10,
+                    "events": [
+                        {
+                            "event": "abstract interest",
+                            "properties": {
+                                "id": "02J0",
+                                "organization_id": "fly_finder",
+                                "session_id": "d9a510fb-10a9-4c76-981e-9988559142f8",
+                                "visitor_id": "6ee0e958-adb0-49b4-8415-31556bef71e9",
+                                "weight": 4
+                            }
+                        },
+                        {
+                            "event": "abstract interest",
+                            "properties": {
+                                "id": "96AH",
+                                "organization_id": "fly_finder",
+                                "session_id": "d9a510fb-10a9-4c76-981e-9988559142f8",
+                                "visitor_id": "6ee0e958-adb0-49b4-8415-31556bef71e9",
+                                "weight": -1
+                            }
+                        },
+                        {
+                            "event": "feed linger metrics",
+                            "properties": {
+                                "organization_id": "fly_finder",
+                                "payload": {
+                                    "2f48fa05-3089-483a-bd2e-a75bc4d1ba40": {
+                                        "enter_count": 1,
+                                        "id": "3MS8",
+                                        "time": 6.84,
+                                        "type": "product_detail_card"
+                                    },
+                                    "9bc3bfb0-5ef8-4594-aa85-93c36afd1188": {
+                                        "enter_count": 1,
+                                        "id": "27Y0",
+                                        "time": 6.8,
+                                        "type": "product_detail_card"
+                                    },
+                                    "ba54faeb-040b-4227-a052-8983242b02bd": {
+                                        "enter_count": 1,
+                                        "id": "96AH",
+                                        "time": 6.88,
+                                        "type": "product_detail_card"
+                                    }
+                                },
+                                "session_id": "d9a510fb-10a9-4c76-981e-9988559142f8",
+                                "visitor_id": "6ee0e958-adb0-49b4-8415-31556bef71e9"
+                            }
+                        }
+                    ],
+                    "page": 2,
+                    "search_prompt": "Show my the best flies to take on a fly fishing trip to the Kern River in mid-June"
+                },
+                "properties": {
+                    "batch_count": {
+                        "default": 10,
+                        "title": "Batch Count",
+                        "type": "integer"
+                    },
+                    "events": {
+                        "default": [],
+                        "items": {
+                            "$ref": "#/components/schemas/Event"
+                        },
+                        "title": "Events",
+                        "type": "array"
+                    },
+                    "page": {
+                        "default": 1,
+                        "title": "Page",
+                        "type": "integer"
+                    },
+                    "search_prompt": {
+                        "default": "",
+                        "title": "Search Prompt",
+                        "type": "string"
+                    }
+                },
+                "title": "FeedPayload",
+                "type": "object"
+            },
+            "Event": {
+                "properties": {
+                    "event": {
+                        "title": "Event",
+                        "type": "string"
+                    },
+                    "properties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/LingerEventProperties"
+                            },
+                            {
+                                "$ref": "#/components/schemas/AbstractInterestProperties"
+                            }
+                        ],
+                        "title": "Properties"
+                    }
+                },
+                "required": [
+                    "event",
+                    "properties"
+                ],
+                "title": "Event",
+                "type": "object"
+            },
+            "LingerEventProperties": {
+                "properties": {
+                    "organization_id": {
+                        "title": "Organization Id",
+                        "type": "string"
+                    },
+                    "payload": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/LingerPayloadItem"
+                        },
+                        "title": "Payload",
+                        "type": "object"
+                    },
+                    "session_id": {
+                        "title": "Session Id",
+                        "type": "string"
+                    },
+                    "visitor_id": {
+                        "title": "Visitor Id",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "organization_id",
+                    "visitor_id",
+                    "session_id",
+                    "payload"
+                ],
+                "title": "LingerEventProperties",
+                "type": "object"
+            },
+            "LingerPayloadItem": {
+                "properties": {
+                    "enter_count": {
+                        "title": "Enter Count",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "time": {
+                        "title": "Time",
+                        "type": "number"
+                    },
+                    "type": {
+                        "title": "Type",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "time",
+                    "id",
+                    "enter_count",
+                    "type"
+                ],
+                "title": "LingerPayloadItem",
+                "type": "object"
+            },
+            "AbstractInterestProperties": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "organization_id": {
+                        "title": "Organization Id",
+                        "type": "string"
+                    },
+                    "session_id": {
+                        "title": "Session Id",
+                        "type": "string"
+                    },
+                    "visitor_id": {
+                        "title": "Visitor Id",
+                        "type": "string"
+                    },
+                    "weight": {
+                        "title": "Weight",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "organization_id",
+                    "visitor_id",
+                    "session_id",
+                    "id",
+                    "weight"
+                ],
+                "title": "AbstractInterestProperties",
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "auth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization"
+            }
+        }
+    },
+    "paths": {
+        "/hackathon/project/create": {
+            "post": {
+                "description": "Create a new Gray Whale project.\n\nThe `project_name` will serve as a unique identifier for the project throughout the Gray Whale system. Any project names that conflict with existing projects will be rejected.\n\nRequest Body:\n- `project_name` (str): A unique name for the project. This will be used as an identifier for all subsequent interactions related to your project.\n- `project_summary` (str): A detailed description of the project. This should include the project's goals, features, and any other relevant information. The more information you provide, the better your model will perform.\n- `owner_email` (str): An email address where notifications will be sent once your model is ready.\n- `first_name` (Optional[str]): The first name of the project owner.\n- `last_name` (Optional[str]): The last name of the project owner.\n\nReturns:\n- SecretPlatformProjectModel: An object containing the project details and access token needed for further development.",
+                "operationId": "create_project_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PlatformProjectModel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SecretPlatformProjectModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Create a Gray Whale Project",
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/platform/project/{project_name}": {
+            "get": {
+                "description": "Retrieve details of a specific Gray Whale project.\n\nParameters:\n- `project_name` (str): The unique name of the project to retrieve.\n\nReturns:\n- PlatformProjectModel: An object containing the project's name, summary, and owner's email.",
+                "operationId": "get_project_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PlatformProjectModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get Project",
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/token": {
+            "get": {
+                "description": "Send the project's access token to the owner's email address.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n\nReturns:\n- A confirmation message that the access token has been sent.",
+                "operationId": "send_access_token_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Send Access Token to Email",
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/update": {
+            "put": {
+                "description": "Update an existing Gray Whale project.\n\nParameters:\n- `project_name` (str): The unique name of the project to update.\n\nRequest Body (all fields optional):\n- `project_summary` (str): Updated project description.\n- `owner_email` (str): Updated owner email address.\n- `first_name` (str): Updated first name.\n- `last_name` (str): Updated last name.\n\nReturns:\n- PlatformProjectModel: The updated project details.",
+                "operationId": "update_project_put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProjectUpdate"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PlatformProjectModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Update Project",
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/items/list": {
+            "get": {
+                "description": "Retrieve a paginated list of items in the project's catalog.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `offset` (int, query, optional): Number of items to skip (default: 0).\n- `limit` (int, query, optional): Maximum number of items to return (default: 50).\n\nReturns:\n- A list of GrayWhaleItem objects.",
+                "operationId": "list_items_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "count",
+                        "required": false,
+                        "schema": {
+                            "default": 10,
+                            "title": "Limit",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/GrayWhaleItem"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "List Items",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/items/{item_id}": {
+            "get": {
+                "description": "Retrieve a single item by its ID.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `item_id` (str): The ID of the item to retrieve.\n\nReturns:\n- GrayWhaleItem: The requested item.",
+                "operationId": "get_item_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "item_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Item Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleItem"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get Item",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/items/create": {
+            "post": {
+                "description": "Create one or more items in the project's catalog.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n\nRequest Body:\n- A list of GrayWhaleItem objects to create.\n\nReturns:\n- The list of created GrayWhaleItem objects.",
+                "operationId": "create_items_post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "items": {
+                                    "$ref": "#/components/schemas/GrayWhaleItem"
+                                },
+                                "type": "array"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/GrayWhaleItem"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Create Items",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/items/{item_id}/update": {
+            "put": {
+                "description": "Update an existing item in the project's catalog.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `item_id` (str): The ID of the item to update.\n\nRequest Body:\n- GrayWhaleItemUpdate: Fields to update (all optional).\n\nReturns:\n- GrayWhaleItem: The updated item.",
+                "operationId": "update_item_put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "item_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Item Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GrayWhaleItemUpdate"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleItem"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Update Item",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/items/{item_id}/delete": {
+            "delete": {
+                "description": "Delete an item from the project's catalog.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `item_id` (str): The ID of the item to delete.\n\nReturns:\n- A confirmation message.",
+                "operationId": "delete_item_delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "item_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Item Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Delete Item",
+                "tags": [
+                    "Items"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/models/policies": {
+            "get": {
+                "description": "Retrieve all policies for the project's model.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n\nReturns:\n- A list of GrayWhaleModelPolicy objects.",
+                "operationId": "list_policies_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/GrayWhaleModelPolicy"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "List Policies",
+                "tags": [
+                    "Policies"
+                ]
+            },
+            "post": {
+                "description": "Create one or more policies for the project's model.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n\nRequest Body:\n- A list of GrayWhaleModelPolicySubmission objects.\n\nReturns:\n- The list of created GrayWhaleModelPolicy objects.",
+                "operationId": "create_policies_post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "items": {
+                                    "$ref": "#/components/schemas/GrayWhaleModelPolicySubmission"
+                                },
+                                "type": "array"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/GrayWhaleModelPolicy"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Create Policies",
+                "tags": [
+                    "Policies"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/models/policies/{policy_id}": {
+            "get": {
+                "description": "Retrieve a single policy by its ID.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `policy_id` (str): The ID of the policy to retrieve.\n\nReturns:\n- GrayWhaleModelPolicy: The requested policy.",
+                "operationId": "get_policy_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "policy_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Policy Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleModelPolicy"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get Policy",
+                "tags": [
+                    "Policies"
+                ]
+            },
+            "put": {
+                "description": "Update an existing policy.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `policy_id` (str): The ID of the policy to update.\n\nRequest Body:\n- GrayWhaleModelPolicySubmission: The updated policy content.\n\nReturns:\n- GrayWhaleModelPolicy: The updated policy.",
+                "operationId": "update_policy_put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "policy_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Policy Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GrayWhaleModelPolicySubmission"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleModelPolicy"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Update Policy",
+                "tags": [
+                    "Policies"
+                ]
+            },
+            "delete": {
+                "description": "Delete a policy.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `policy_id` (str): The ID of the policy to delete.\n\nReturns:\n- A confirmation message.",
+                "operationId": "delete_policy_delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "policy_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Policy Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Delete Policy",
+                "tags": [
+                    "Policies"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/models/policies/{policy_id}/enable": {
+            "put": {
+                "description": "Enable or disable a policy.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `policy_id` (str): The ID of the policy to enable or disable.\n- `enabled` (bool, query): Set to `true` to enable or `false` to disable the policy.\n\nReturns:\n- GrayWhaleModelPolicy: The updated policy.",
+                "operationId": "enable_policy_put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "policy_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Policy Id",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "enabled",
+                        "required": true,
+                        "schema": {
+                            "title": "Enabled",
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleModelPolicy"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Enable/Disable Policy",
+                "tags": [
+                    "Policies"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/model/list": {
+            "get": {
+                "description": "Retrieve a list of models for a specific hackathon project.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n\nReturns:\n- List[GrayWhaleModel]: A list of models associated with the specified project.",
+                "operationId": "list_models_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "List Models",
+                "tags": [
+                    "Model Management"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/models/{model_id}": {
+            "get": {
+                "description": "Retrieve details of a specific model.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `model_id` (str): The ID of the model to retrieve.\n\nReturns:\n- GrayWhaleModel: The model details including accuracy, status, and associated policies.",
+                "operationId": "get_model_get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "model_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Model Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Get Model",
+                "tags": [
+                    "Model Management"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/models/train": {
+            "post": {
+                "description": "Train a new model for the project. This will use the project's current items and policies to create a new model.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n\nReturns:\n- GrayWhaleModel: The newly created model with its training status.",
+                "operationId": "train_model_post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Train Model",
+                "tags": [
+                    "Model Management"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/models/{model_id}/train": {
+            "post": {
+                "description": "Retrain an existing model for the project. This will use the project's current items and policies to retrain the specified model.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `model_id` (str): The existing model ID to retrain from.\n\nReturns:\n- GrayWhaleModel: The retrained model with its training status.",
+                "operationId": "retrain_model_post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "model_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Model Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Retrain Model",
+                "tags": [
+                    "Model Management"
+                ]
+            }
+        },
+        "/platform/project/{project_name}/models/{model_id}/activate": {
+            "post": {
+                "description": "Activate a trained model for use in the project's feed.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `model_id` (str): The ID of the model to activate.\n\nReturns:\n- GrayWhaleModel: The activated model.",
+                "operationId": "activate_model_post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "title": "Project Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "model_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Model Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GrayWhaleModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Activate Model",
+                "tags": [
+                    "Model Management"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/batch/{session_id}": {
+            "post": {
+                "description": "Fetch the next group of item identifiers for a self-learning session.\n\nParameters:\n- `project_name` (str): The name of the project for which the feed is requested.\n- `session_id` (str): The identifier for the current user session.\n\n\nRequest Body:\n- `page` (Optional[int]): The page number of the feed to be returned.\n- `batch_count` (Optional[int]): The number of cards to be returned in the feed.\n- `events` (Recommended[List[Dict]]): A list of events that have occurred in the session. The client skeleton handles all of the event submission logic - if you are interested in designing your own client we recommend looking at that reference. In addition to linger events, you can also submit abstract interest events which act as a thumbs up/down mechanism for influencing the next batch of recommendations.\n- `search_prompt` (Optional[str]): A search prompt to be used to generate the feed. This acts as a top-level filter on the feed - searched items are prioritized over those inferred from the submitted events.\n\n\nReturns:\n    Dict: A dictionary containing a list of cards to be displayed in the feed. Refer to the client-side implementation for displaying these card types.",
+                "operationId": "fetch_next_batch_items_hackathon__project_name__batch__session_id__post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                { "type": "string" },
+                                { "type": "null" }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "session_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Session Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FeedPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response Fetch Next Batch Items",
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Fetch Next Batch Items",
+                "tags": [
+                    "Feed"
+                ]
+            }
+        },
+        "/hackathon/{project_name}/feed/{session_id}": {
+            "post": {
+                "description": "Fetch the next group of `Cards` for a self-learning session.\n\nThis endpoint serves as the primary delivery system for personalized recommendations. It utilizes the promoted model, session details, and user-provided inputs to generate the next batch of cards.\n\nParameters:\n- `project_name` (str): The name of the project for which the feed is requested.\n- `session_id` (str): The identifier for the current user session.\n\n\nRequest Body:\n- `page` (Optional[int]): The page number of the feed to be returned.\n- `batch_count` (Optional[int]): The number of cards to be returned in the feed.\n- `events` (Recommended[List[Dict]]): A list of events that have occurred in the session. The client skeleton handles all of the event submission logic - if you are interested in designing your own client we recommend looking at that reference. In addition to linger events, you can also submit abstract interest events which act as a thumbs up/down mechanism for influencing the next batch of recommendations.\n- `search_prompt` (Optional[str]): A search prompt to be used to generate the feed. This acts as a top-level filter on the feed - searched items are prioritized over those inferred from the submitted events.\n\n\nReturns:\n    Dict: A dictionary containing a list of cards to be displayed in the feed. Refer to the client-side implementation for displaying these card types.",
+                "operationId": "fetch_next_batch_cards_hackathon__project_name__feed__session_id__post",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "schema": {
+                            "anyOf": [
+                                { "type": "string" },
+                                { "type": "null" }
+                            ],
+                            "title": "Project Name"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "session_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Session Id",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FeedPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": true,
+                                    "title": "Response Fetch Next Batch Cards",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "auth": []
+                    }
+                ],
+                "summary": "Fetch Next Batch Cards",
+                "tags": [
+                    "Feed"
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "description": "Create and manage your Gray Whale project.",
+            "name": "Project"
+        },
+        {
+            "description": "Seed your model with data instances: products, articles, recipes, etc.",
+            "name": "Items"
+        },
+        {
+            "description": "Add custom rules and policies to guide your LIM's behavior.",
+            "name": "Policies"
+        },
+        {
+            "description": "Train and deploy your custom Gray Whale model.",
+            "name": "Model Management"
+        },
+        {
+            "description": "Start interacting with your model to retrieve your custom recommendations.",
+            "name": "Feed"
+        },
+        {
+            "description": "Real-time personalized feed via WebSocket. Scroll to the bottom of this page for the full WebSocket reference, message schemas, code examples, and an interactive live console.",
+            "name": "WebSocket Feed"
+        }
+    ]
+}
