@@ -1,1 +1,213 @@
-Gray Whale AI
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gray Whale AI — Documentation</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f7f9;
+      color: #2c3e50;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #abb8c3;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    header img {
+      height: 52px;
+    }
+
+    header h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a2e3d;
+      letter-spacing: 0.02em;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 56px auto;
+      padding: 0 24px;
+    }
+
+    .intro {
+      margin-bottom: 40px;
+    }
+
+    .intro h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      font-size: 1rem;
+      color: #556070;
+      line-height: 1.6;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #34383c;
+      margin-bottom: 14px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #dde3ea;
+      border-radius: 10px;
+      padding: 24px 28px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border-color: #5b8fa8;
+    }
+
+    .card:first-child {
+      background: #4c92cb;
+      border-color: #3a7ab8;
+      color: white;
+    }
+
+    .card:first-child .card-desc {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .card:first-child .card-link {
+      color: white;
+      font-weight: 700;
+    }
+
+    .card:first-child:hover {
+      box-shadow: 0 6px 20px rgba(76, 146, 203, 0.4);
+      border-color: #2d6a9f;
+    }
+
+    .card:nth-child(2) {
+      background: #8c969e;
+      border-color: #6c767e;
+      color: white;
+    }
+
+    .card:nth-child(2) .card-desc {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .card:nth-child(2) .card-link {
+      color: white;
+      font-weight: 700;
+    }
+
+    .card:nth-child(2) .badge {
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+    }
+
+    .card:nth-child(2):hover {
+      box-shadow: 0 6px 20px rgba(171, 184, 195, 0.4);
+      border-color: #7d8d9a;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: #e8f0f5;
+      color: #3a6478;
+    }
+
+    .badge.latest {
+      background: #d4edda;
+      color: #1d6a35;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: #556070;
+      line-height: 1.55;
+    }
+
+    .card-link {
+      font-size: 0.82rem;
+      color: #5b8fa8;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="graywhale_logo.png" alt="Gray Whale AI">
+    <h1>API Documentation</h1>
+  </header>
+
+  <main>
+    <div class="intro">
+      <h2>Welcome</h2>
+      <p>Browse the Gray Whale API reference documentation. These Swagger pages are interactive and give you access to all of the endpoints needed to build and deploy your self-learning recommendation feed using your custom Large Interaction Model (LIMs)</p>
+    </div>
+
+    <div class="section-label">API Reference</div>
+    <div class="cards">
+
+      <a class="card" href="2.0API/index.html">
+        <div class="card-header">
+          <span class="card-title">2.0 API</span>
+          <span class="badge latest">Latest</span>
+        </div>
+        <p class="card-desc">Create, manage, and train your custom Large Interaction Model (LIM) and deploy it to your feed using a REST API or a WebSocket.</p>
+        <span class="card-link">View docs →</span>
+      </a>
+
+      <a class="card" href="1.0API/index.html">
+        <div class="card-header">
+          <span class="card-title">1.0 API</span>
+          <span class="badge">v0.1.0</span>
+        </div>
+        <p class="card-desc">Original API release. Core project creation and feed endpoints.</p>
+        <span class="card-link">View docs →</span>
+      </a>
+
+    </div>
+  </main>
+
+</body>
+</html>
