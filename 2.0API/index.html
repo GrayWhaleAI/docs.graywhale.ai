@@ -623,7 +623,7 @@
             <tr>
               <td><span class="ws-param-name">project_id</span></td>
               <td><span class="ws-param-type">string</span></td>
-              <td>Your Gray Whale project name (e.g. <code>fly_finder</code>)</td>
+              <td>Your Gray Whale project name (e.g. <code>LureLogicII</code>)</td>
               <td><span class="ws-badge-req">required</span></td>
             </tr>
             <tr>
@@ -650,7 +650,7 @@
           <div class="ws-tab-panel active" data-panel="js">
             <div class="ws-code-block">
               <button class="ws-copy-btn" onclick="wsCopy(this)">Copy</button>
-              <pre><span class="t-kw">const</span> project_id = <span class="t-str">"fly_finder"</span>;
+              <pre><span class="t-kw">const</span> project_id = <span class="t-str">"LureLogicII"</span>;
 <span class="t-kw">const</span> visitor_id  = <span class="t-str">"199bd538-30a0-4921-922d-cd81dfc6f308"</span>;
 <span class="t-kw">const</span> session_id  = <span class="t-str">"17a6f3c6-1669-44da-862e-fc0d86f1dd29"</span>;
 
@@ -670,7 +670,7 @@ ws.<span class="t-fn">onclose</span>   = ()    =&gt; console.<span class="t-fn">
               <pre><span class="t-kw">import</span> asyncio
 <span class="t-kw">import</span> websockets
 
-project_id = <span class="t-str">"fly_finder"</span>
+project_id = <span class="t-str">"LureLogicII"</span>
 visitor_id  = <span class="t-str">"199bd538-30a0-4921-922d-cd81dfc6f308"</span>
 session_id  = <span class="t-str">"17a6f3c6-1669-44da-862e-fc0d86f1dd29"</span>
 
@@ -692,7 +692,7 @@ asyncio.<span class="t-fn">run</span>(<span class="t-fn">main</span>())</pre>
 npm install -g wscat
 
 <span class="t-cm"># Connect:</span>
-wscat -c "wss://app.productgenius.io/ws/platform/feed/fly_finder/199bd538-30a0-4921-922d-cd81dfc6f308/17a6f3c6-1669-44da-862e-fc0d86f1dd29"</pre>
+wscat -c "wss://app.productgenius.io/ws/platform/feed/LureLogicII/199bd538-30a0-4921-922d-cd81dfc6f308/17a6f3c6-1669-44da-862e-fc0d86f1dd29"</pre>
             </div>
           </div>
         </div>
@@ -885,7 +885,7 @@ asyncio.<span class="t-fn">create_task</span>(<span class="t-fn">keepalive</span
           <h3>Try It Live</h3>
         </div>
         <div class="ws-callout">
-          Enter your credentials below and connect directly to the Gray Whale WebSocket. Pre-filled values use the example project — replace with your own to test against live data.
+          Use the interactive console below to test the WebSocket feed requests and responses using live data.
         </div>
 
         <div class="ws-console">
@@ -899,7 +899,7 @@ asyncio.<span class="t-fn">create_task</span>(<span class="t-fn">keepalive</span
           <div class="ws-console-inputs">
             <div class="ws-input-group">
               <label>project_id</label>
-              <input type="text" id="wsProjectId" value="fly_finder" spellcheck="false">
+              <input type="text" id="wsProjectId" value="LureLogicII" spellcheck="false">
             </div>
             <div class="ws-input-group">
               <label>visitor_id</label>

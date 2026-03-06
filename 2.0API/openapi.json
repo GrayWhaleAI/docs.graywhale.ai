@@ -15,8 +15,8 @@
         "schemas": {
             "PlatformProjectModel": {
                 "example": {
-                    "project_name": "fly_finder",
-                    "project_summary": "Fly Finder is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences—whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, Fly Finder dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job.",
+                    "project_name": "LureLogicII",
+                    "project_summary": "LureLogicII is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences—whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, LureLogicII dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job.",
                     "owner_email": "john.smith@graywhale.ai",
                     "first_name": "John",
                     "last_name": "Smith"
@@ -55,8 +55,8 @@
             },
             "HackathonProjectModel": {
                 "example": {
-                    "project_name": "fly_finder",
-                    "project_summary": "Fly Finder is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences—whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, Fly Finder dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job.",
+                    "project_name": "LureLogicII",
+                    "project_summary": "LureLogicII is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences—whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, LureLogicII dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job.",
                     "hacker_email": "john.smith@graywhale.ai",
                     "first_name": "John",
                     "last_name": "Smith"
@@ -96,8 +96,8 @@
             "SecretPlatformProjectModel": {
                 "example": {
                     "access_token": "abc123...",
-                    "project_name": "fly_finder",
-                    "project_summary": "Fly Finder is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences—whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, Fly Finder dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job.",
+                    "project_name": "LureLogicII",
+                    "project_summary": "LureLogicII is an AI-powered recommendation system that helps anglers discover the perfect fly-fishing flies based on their unique fishing style, target species, and local conditions. This self-learning feed evolves with each interaction, refining recommendations based on user preferences—whether they favor dry flies, nymphs, streamers, or emergers. By analyzing behavior, such as flies previously used, water conditions, and fishing locations, LureLogicII dynamically suggests the most effective patterns, materials, and techniques. Whether you're fishing for trout in mountain streams, bass in warm water, or steelhead in the Pacific Northwest, this AI-driven system ensures you're always casting with the best fly for the job.",
                     "owner_email": "john.smith@graywhale.ai",
                     "first_name": "John",
                     "last_name": "Smith"
@@ -491,7 +491,7 @@
                             "event": "abstract interest",
                             "properties": {
                                 "id": "02J0",
-                                "organization_id": "fly_finder",
+                                "organization_id": "LureLogicII",
                                 "session_id": "d9a510fb-10a9-4c76-981e-9988559142f8",
                                 "visitor_id": "6ee0e958-adb0-49b4-8415-31556bef71e9",
                                 "weight": 4
@@ -501,7 +501,7 @@
                             "event": "abstract interest",
                             "properties": {
                                 "id": "96AH",
-                                "organization_id": "fly_finder",
+                                "organization_id": "LureLogicII",
                                 "session_id": "d9a510fb-10a9-4c76-981e-9988559142f8",
                                 "visitor_id": "6ee0e958-adb0-49b4-8415-31556bef71e9",
                                 "weight": -1
@@ -510,7 +510,7 @@
                         {
                             "event": "feed linger metrics",
                             "properties": {
-                                "organization_id": "fly_finder",
+                                "organization_id": "LureLogicII",
                                 "payload": {
                                     "2f48fa05-3089-483a-bd2e-a75bc4d1ba40": {
                                         "enter_count": 1,
@@ -1207,7 +1207,7 @@
                 ]
             }
         },
-        "/platform/project/{project_name}/models/policies": {
+        "/platform/{project_name}/models/policies": {
             "get": {
                 "description": "Retrieve all policies for the project's model.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n\nReturns:\n- A list of GrayWhaleModelPolicy objects.",
                 "operationId": "list_policies_get",
@@ -1320,7 +1320,7 @@
                 ]
             }
         },
-        "/platform/project/{project_name}/models/policies/{policy_id}": {
+        "/platform/{project_name}/models/policies/{policy_id}": {
             "get": {
                 "description": "Retrieve a single policy by its ID.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `policy_id` (str): The ID of the policy to retrieve.\n\nReturns:\n- GrayWhaleModelPolicy: The requested policy.",
                 "operationId": "get_policy_get",
@@ -1497,7 +1497,7 @@
                 ]
             }
         },
-        "/platform/project/{project_name}/models/policies/{policy_id}/enable": {
+        "/platform/{project_name}/models/policies/{policy_id}/enable": {
             "put": {
                 "description": "Enable or disable a policy.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `policy_id` (str): The ID of the policy to enable or disable.\n- `enabled` (bool, query): Set to `true` to enable or `false` to disable the policy.\n\nReturns:\n- GrayWhaleModelPolicy: The updated policy.",
                 "operationId": "enable_policy_put",
@@ -1611,7 +1611,7 @@
                 ]
             }
         },
-        "/platform/project/{project_name}/models/{model_id}": {
+        "/platform/{project_name}/models/{model_id}": {
             "get": {
                 "description": "Retrieve details of a specific model.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `model_id` (str): The ID of the model to retrieve.\n\nReturns:\n- GrayWhaleModel: The model details including accuracy, status, and associated policies.",
                 "operationId": "get_model_get",
@@ -1668,7 +1668,7 @@
                 ]
             }
         },
-        "/platform/project/{project_name}/models/train": {
+        "/platform/{project_name}/models/train": {
             "post": {
                 "description": "Train a new model for the project. This will use the project's current items and policies to create a new model.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n\nReturns:\n- GrayWhaleModel: The newly created model with its training status.",
                 "operationId": "train_model_post",
@@ -1716,7 +1716,7 @@
                 ]
             }
         },
-        "/platform/project/{project_name}/models/{model_id}/train": {
+        "/platform/{project_name}/models/{model_id}/train": {
             "post": {
                 "description": "Retrain an existing model for the project. This will use the project's current items and policies to retrain the specified model.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `model_id` (str): The existing model ID to retrain from.\n\nReturns:\n- GrayWhaleModel: The retrained model with its training status.",
                 "operationId": "retrain_model_post",
@@ -1773,7 +1773,7 @@
                 ]
             }
         },
-        "/platform/project/{project_name}/models/{model_id}/activate": {
+        "/platform/{project_name}/models/{model_id}/activate": {
             "post": {
                 "description": "Activate a trained model for use in the project's feed.\n\nParameters:\n- `project_name` (str): The unique name of the project.\n- `model_id` (str): The ID of the model to activate.\n\nReturns:\n- GrayWhaleModel: The activated model.",
                 "operationId": "activate_model_post",
