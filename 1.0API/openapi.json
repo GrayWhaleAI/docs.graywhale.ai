@@ -738,7 +738,7 @@
         }
     },
     "info": {
-        "description": "## Start Building Your Custom LIM!\n\nThis API is designed to provide everything you need to launch an awesome, self-learning feed using Gray Whale AI's Large Interaction Models (LIMs)! We've got you covered from onboarding to deployment and everything in between.\n\nIf you'd like some additional information, head over to the [Hackathon Documentation](https://gamalon.github.io/genius-hackathon-documentation/) to learn more.",
+        "description": "## Start Building Your Custom LIM!\n\nThis API is designed to provide everything you need to launch an awesome, self-learning feed using Gray Whale AI's Large Interaction Models (LIMs)! We've got you covered from onboarding to deployment and everything in between.\n\nIf you'd like some additional information, head over to the [Remoras Documentation](https://github.com/GrayWhaleAI/remoras/wiki/) to learn more.",
         "title": "Gray Whale API",
         "version": "0.1.0"
     },

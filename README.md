@@ -1,12 +1,13 @@
-# docs.graywhale.ai
+# Gray Whale Documentation
 
-This repo is for Gray Whale's public facing API and tools documentation using GitHub Pages.
+Public-facing documentation for Gray Whale's APIs and tools, hosted at [docs.graywhale.ai](https://docs.graywhale.ai).
 
-GitHub Pages utilizes the [Jekyll](https://jekyllrb.com) system and formatting.
+## What's Inside
 
-Pages can be created in .md or .html format.
+- **API Documentation**: OpenAPI specifications and interactive documentation for Gray Whale APIs
+- **Version 1.0**: Legacy API documentation at `/1.0API/`
+- **Version 2.0**: Current API documentation at `/2.0API/`
 
-Pages can be organized into folders. So if a folder is setup called *api*, then the site address for that folder would be https://docs.graywhale.ai/api/
+## Technical Details
 
-Learn more about the [directory structure of GitHub Pages using the Jekyll system read more here](https://jekyllrb.com/docs/structure/).
-
+This site is built with GitHub Pages and Jekyll. Pages are written in Markdown or HTML, and folder structure maps directly to URLs (e.g., `/api/` folder → `docs.graywhale.ai/api/`).

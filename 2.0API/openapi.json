@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Gray Whale API",
-        "description": "## Build Your Custom LIM\n\nThis API provides everything you need to launch an awesome, self-learning feed using Gray Whale AI's Large Interaction Models (LIMs). We've got you covered from onboarding to deployment and everything in between.\n\nHead over to the [Platform Documentation](https://docs.graywhale.ai) to learn more. \n\n ## WebSocket Feed \n\nThis version of the Gray Whale API also supports a real-time, personalized feed via WebSocket. Scroll to the bottom of this page for the full WebSocket reference, message schemas, code examples, and an interactive live console. **If you want to use the WebSocket feed, you will need to train your model using the endpoint in this API.**",
+        "description": "## Build Your Custom LIM\n\nThis API provides everything you need to launch an awesome, self-learning feed using Gray Whale AI's Large Interaction Models (LIMs). We've got you covered from onboarding to deployment and everything in between.\n\nHead over to the [Remoras Documentation](https://github.com/GrayWhaleAI/remoras/wiki/) to learn more. \n\n ## WebSocket Feed \n\nThis version of the Gray Whale API also supports a real-time, personalized feed via WebSocket. Scroll to the bottom of this page for the full WebSocket reference, message schemas, code examples, and an interactive live console. **If you want to use the WebSocket feed, you will need to train your model using the endpoint in this API.**",
         "version": "0.2.0"
     },
     "servers": [
